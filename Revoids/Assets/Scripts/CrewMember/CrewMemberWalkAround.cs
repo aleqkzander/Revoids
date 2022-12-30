@@ -4,47 +4,46 @@ using UnityEngine;
 
 public class CrewMemberWalkAround : MonoBehaviour
 {
-    public float timeToChangeDirection = 2f;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    private bool isGrounded;
+    private bool walkRight = true;
 
-    private void Start()
+    void Start()
     {
-        ChangeDirection();
+        InvokeRepeating("ChangeBool", 0.1f, 5);
     }
 
-    private void ChangeDirection()
+    private void Update()
     {
-        float angle = 0f;
-        float left = -180;
-        float right = 180;
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.15f, groundLayer);
+    }
 
-        float randomNumber = Random.Range(0,1);
-
-        if (randomNumber > 0.5f)
+    private void ChangeBool()
+    {
+        switch (walkRight)
         {
-            angle = right;
+            case true:
+                walkRight = false;
+                break;
+            case false:
+                walkRight = true;
+                break;
         }
-        else
-        {
-            angle = left;
-        }
-
-        Quaternion quat = Quaternion.AngleAxis(angle, Vector3.forward);
-        Vector3 newUp = quat * Vector3.up;
-        newUp.z = 0;
-        newUp.Normalize();
-        transform.up = newUp;
-        timeToChangeDirection = 1.5f;
     }
 
     public void MovePlayer(Rigidbody2D rigidbody)
     {
-        timeToChangeDirection -= Time.fixedDeltaTime;
+        if (!isGrounded) return;
 
-        if (timeToChangeDirection <= 0)
+        if (walkRight)
         {
-            ChangeDirection();
+            rigidbody.velocity = Vector2.right * 1.0f;
         }
-
-        rigidbody.velocity = transform.up * 2;
+        else
+        {
+            rigidbody.velocity = Vector2.left * 1.0f;
+        }
     }
+
 }
