@@ -5,12 +5,18 @@ using UnityEngine;
 public class RocketController : MonoBehaviour
 {
     new private Rigidbody2D rigidbody;
-
     private float rotationAxis;
     private float driveAxis;
 
+    [Header("Movement")]
     public float rotationSpeed = 2.0f;
     public float driveForce = 5.0f;
+
+    [Header("Grounded")]
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public bool isGrounded;
+    
 
 
     private void Awake()
@@ -18,10 +24,13 @@ public class RocketController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
+
     private void Update()
     {
-        ConsumeInput();
+        ConsumeInputAndGroundCheck();
+
     }
+
 
     private void FixedUpdate()
     {
@@ -32,10 +41,14 @@ public class RocketController : MonoBehaviour
     /// <summary>
     /// Benutzereingaben registrieren und Werte zuweisen
     /// </summary>
-    private void ConsumeInput()
+    private void ConsumeInputAndGroundCheck()
     {
+        // Lege die X-Achse fest
         rotationAxis = Input.GetAxis("Horizontal");
+        // Lege die Y-Achse fest
         driveAxis = Input.GetAxis("Vertical");
+        // Prüfe ob der Spieler auf der Erde ist
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.05f, groundLayer);
     }
 
     /// <summary>
