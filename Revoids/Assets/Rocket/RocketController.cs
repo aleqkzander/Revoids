@@ -12,51 +12,68 @@ public class RocketController : MonoBehaviour
     public float rotationSpeed = 2.0f;
     public float driveForce = 5.0f;
 
-    [Header("Grounded")]
-    public Transform groundCheck;
-    public LayerMask groundLayer;
+    [Header("Movement")]
+    [HideInInspector]
     public bool isGrounded;
+    private float checkRadius = 0.5f;
+
+    [Header("Shooting")]
+    public GameObject shootPosition;
+    public GameObject bulletPrefab;
+    public float shootForce = 10.0f;
     
 
 
     private void Awake()
     {
+        // Nehme die Rigidbody2D Komponente vom GameObject
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
 
     private void Update()
     {
-        ConsumeInputAndGroundCheck();
-
-    }
-
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-
-
-    /// <summary>
-    /// Benutzereingaben registrieren und Werte zuweisen
-    /// </summary>
-    private void ConsumeInputAndGroundCheck()
-    {
         // Lege die X-Achse fest
         rotationAxis = Input.GetAxis("Horizontal");
         // Lege die Y-Achse fest
         driveAxis = Input.GetAxis("Vertical");
         // Prüfe ob der Spieler auf der Erde ist
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.05f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(gameObject.transform.position, checkRadius, LayerMask.GetMask("Ground"));
+
+        // Shoot als Methode belassen da später einem Button zuweisen auf dem Mobile Device
+        Shoot();
     }
 
-    /// <summary>
-    /// Spielfigur bewegen bewegen (Nur Fixed Update benutzen. Gilt immer für physikalische Körper.)
-    /// </summary>
-    private void MovePlayer()
+
+    private void FixedUpdate()
     {
+        // Spielfigur bewegen
         rigidbody.rotation -= rotationAxis * rotationSpeed;
         rigidbody.AddRelativeForce(Vector2.up * driveAxis * driveForce);
+    }
+
+
+    /// <summary>
+    /// Schießt eine Kugel wenn man Space drückt
+    /// </summary>
+    private void Shoot()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if (bulletPrefab == null) return;
+            GameObject bullet = Instantiate(bulletPrefab, shootPosition.transform.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().AddForce(shootPosition.transform.up * shootForce, ForceMode2D.Impulse);
+        } 
+    }
+
+
+    /// <summary>
+    /// Debug GroundCheck Radius
+    /// </summary>
+    private void OnDrawGizmosSelected()
+    {
+        // Zeige den Radius vom Ground Check bei Auswahl des Crewmembers
+        Gizmos.color = new Color(1, 1, 0, 0.75f);
+        Gizmos.DrawWireSphere(transform.position, checkRadius);
     }
 }
