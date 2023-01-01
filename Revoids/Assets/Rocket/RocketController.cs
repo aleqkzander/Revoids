@@ -11,6 +11,7 @@ public class RocketController : MonoBehaviour
     [Header("Movement")]
     public float rotationSpeed = 2.0f;
     public float driveForce = 5.0f;
+    public GameObject enginePower;
 
     [Header("Movement")]
     [HideInInspector]
@@ -35,8 +36,14 @@ public class RocketController : MonoBehaviour
     {
         // Lege die X-Achse fest
         rotationAxis = Input.GetAxis("Horizontal");
+
         // Lege die Y-Achse fest
         driveAxis = Input.GetAxis("Vertical");
+
+        // Aktivere die Engine Power wenn die Achsen größer null
+        if (Mathf.Abs(driveAxis) > 0) enginePower.SetActive(true);
+        else enginePower.SetActive(false);
+
         // Prüfe ob der Spieler auf der Erde ist
         isGrounded = Physics2D.OverlapCircle(gameObject.transform.position, checkRadius, LayerMask.GetMask("Ground"));
 

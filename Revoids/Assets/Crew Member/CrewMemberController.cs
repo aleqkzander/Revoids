@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CrewMemberController : MonoBehaviour
 {
+    public GameObject crewMemberPickup;
     private Rigidbody2D memberRigidbody;
     private GameObject playerObject;
     private RocketController rocketController;
@@ -11,6 +12,7 @@ public class CrewMemberController : MonoBehaviour
     private bool isGrounded;
     private bool walkRight;
     private float moveRange;
+
 
 
     private void Start()
@@ -74,6 +76,9 @@ public class CrewMemberController : MonoBehaviour
 
         // Hole das RocketStatistic vom GameObject welches die Kollision auslöst
         RocketStatistic rocketStatistic = collision.gameObject.GetComponent<RocketStatistic>();
+
+        // Spiele den Pickupsound ab
+        Instantiate(crewMemberPickup, gameObject.transform.position, Quaternion.identity);
 
         // Für die Methode im dortigen Script aus
         rocketStatistic.MemberEnterSpaceShip(collision, gameObject);

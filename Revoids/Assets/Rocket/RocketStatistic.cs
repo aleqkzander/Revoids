@@ -15,7 +15,6 @@ public class RocketStatistic : MonoBehaviour
     public int lives = 3;
     public int crewMemeber = 0;
 
-
     /// <summary>
     /// Fügt den Member deinem Raumschiff hinzu und zerstört diesen
     /// </summary>
