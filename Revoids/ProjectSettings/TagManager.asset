@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CrewMember
-  - CrewStation
-  - Bullet
+  - UI_CrewHolder
   layers:
   - Default
   - TransparentFX
