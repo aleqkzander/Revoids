@@ -6,6 +6,9 @@ public class RocketController : MonoBehaviour
 {
     new private Rigidbody2D rigidbody;
     public float playerSpeed = 2.0f;
+    public float rotationSpeed = 2.0f;
+    [HideInInspector]
+    public bool isGrounded;
 
 
     private void Awake()
@@ -19,12 +22,25 @@ public class RocketController : MonoBehaviour
     {
         // set and apply rotation
         float rotationAxis = Input.GetAxis("Horizontal");
-        rigidbody.rotation -= (rotationAxis * 1.0f);
+        rigidbody.rotation += (-rotationAxis * rotationSpeed);
 
         // set and apply drive
         Vector2 drive = new Vector2(0, Input.GetAxis("Vertical"));
-        rigidbody.AddRelativeForce(drive * playerSpeed * 10);
+        rigidbody.AddRelativeForce(drive * playerSpeed * 10);        
     }
+
+
+    #region set ground check
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isGrounded = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isGrounded = false;
+    }
+    #endregion
 
 
 }

@@ -33,12 +33,17 @@ public class RocketStatistic : MonoBehaviour
         GameObject uicrewholder = GameObject.Find("UI_CrewHolder");
 
         // spawn uicrewmember
-        GameObject display = Instantiate(crewDisplay);
+        GameObject display = Instantiate(crewDisplay, Vector2.zero, Quaternion.identity);
 
         // add to crew holder as child
-        display.transform.parent = uicrewholder.transform;
+        display.transform.SetParent(uicrewholder.transform);
+
+        // increment members
+        members++;
 
         // destroy the crew member
         Destroy(pickupedCrew);
     }
+
+
 }
