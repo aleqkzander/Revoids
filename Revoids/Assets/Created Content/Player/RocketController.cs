@@ -5,10 +5,15 @@ using UnityEngine;
 public class RocketController : MonoBehaviour
 {
     new private Rigidbody2D rigidbody;
+    public GameObject enginePower;
     public float playerSpeed = 2.0f;
     public float rotationSpeed = 2.0f;
+
+    [Header("Grounded")]
     [HideInInspector]
     public bool isGrounded;
+    private float checkRadius = 0.5f;
+
 
 
     private void Awake()
@@ -26,21 +31,19 @@ public class RocketController : MonoBehaviour
 
         // set and apply drive
         Vector2 drive = new Vector2(0, Input.GetAxis("Vertical"));
-        rigidbody.AddRelativeForce(drive * playerSpeed * 10);        
+        rigidbody.AddRelativeForce(drive * playerSpeed * 10);
+        
+        // activate/deactive engine power
+        if (drive.sqrMagnitude > 0) enginePower.SetActive(true); else enginePower.SetActive(false);
+
+        // set isgrounded
+        isGrounded = Physics2D.OverlapCircle(transform.position, checkRadius, LayerMask.GetMask("Ground"));
     }
 
-
-    #region set ground check
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnDrawGizmosSelected()
     {
-        isGrounded = true;
+        // Zeige den Radius vom Ground Check bei Auswahl des Crewmembers
+        Gizmos.color = new Color(1, 1, 0, 0.75f);
+        Gizmos.DrawWireSphere(transform.position, checkRadius);
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isGrounded = false;
-    }
-    #endregion
-
-
 }

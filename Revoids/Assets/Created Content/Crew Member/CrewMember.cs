@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CrewMember : MonoBehaviour
 {
+    public GameObject pickup;
     new private Rigidbody2D rigidbody;
     private RocketController rocketController;
-    private bool isGrounded;
-    private Vector2 startPosition;
-    private Vector2 leftPosition;
+    private bool isGrounded = false;
+    private bool walkRight = false;
+    private float checkRadius = 0.22f;
+    private int moveValue = 0;
 
 
     private void Start()
@@ -19,37 +21,56 @@ public class CrewMember : MonoBehaviour
         // get rocketcontroller
         rocketController = GameObject.FindGameObjectWithTag("Player").GetComponent<RocketController>();
 
-        // create a random value
-        int randomValue = Random.Range(3,6);
+        // create a random move value
+        moveValue = Random.Range(1,3);
 
-        // get gameobject start position
-        startPosition.x = transform.position.x;
-
-        // set left position
-        leftPosition = new Vector2(startPosition.x + randomValue, 0);
+        // invoke movearound every 2 seconds
+        InvokeRepeating("ChangeDirection", 0.25f, 2);
     }
 
 
     private void FixedUpdate()
     {
+        // set isgrounded
+        isGrounded = Physics2D.OverlapCircle(transform.position, checkRadius, LayerMask.GetMask("Ground"));
+
         // return when not on ground
         if (!isGrounded) return;
-        
-        // move to player when on ground
-        if (rocketController.isGrounded) MoveTowardsPlayer();
-
+       
         // move around randomly
-        else MoveAround();
+        if (!rocketController.isGrounded) MoveAround();
+
+        // move to player
+        else if (rocketController.isGrounded) MoveTowardsPlayer();
     }
 
 
     /// <summary>
-    /// move randomy around
+    /// ivoke this method to change direction
+    /// </summary>
+    private void ChangeDirection()
+    {
+        // change state
+        switch (walkRight)
+        {
+            case false:
+                walkRight = true;
+                break;
+            case true:
+                walkRight = false;
+                break;
+        }
+    }
+
+
+    /// <summary>
+    /// move around ramdomly
     /// </summary>
     public void MoveAround()
     {
-        if (transform.position.x == startPosition.x) rigidbody.MovePosition(leftPosition * 1.5f * Time.deltaTime);
-        else if (transform.position.x == leftPosition.x) rigidbody.MovePosition(startPosition * 1.5f * Time.deltaTime);
+        // walk left or right
+        if (walkRight == true) rigidbody.velocity = Vector2.right * moveValue; 
+        if (walkRight == false) rigidbody.velocity = Vector2.left * moveValue;
     }
 
 
@@ -81,20 +102,8 @@ public class CrewMember : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             RocketStatistic statistic = collision.gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+            Instantiate(pickup, transform.position, Quaternion.identity);
             statistic.PickupCrewMember(2000, gameObject);
         }
     }
-
-
-    #region set ground check
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        isGrounded = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isGrounded = false;
-    }
-    #endregion
 }
