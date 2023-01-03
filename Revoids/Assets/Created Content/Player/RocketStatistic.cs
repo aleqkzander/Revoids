@@ -10,7 +10,13 @@ public class RocketStatistic : MonoBehaviour
 
     [Header("Statistic")]
     public int score;
+    // 8 members required for mother ship
     public int members;
+    // 4 lives is default;
+    public int lives = 4;
+    // 2 shield default
+    public int rocketShields = 2;
+
     
 
     /// <summary>

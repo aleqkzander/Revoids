@@ -7,7 +7,7 @@ public class RocketController : MonoBehaviour
     new private Rigidbody2D rigidbody;
     public GameObject enginePower;
     public float playerSpeed = 2.0f;
-    public float rotationSpeed = 2.0f;
+    public float rotationSpeed = 4.0f;
 
     [Header("Grounded")]
     [HideInInspector]
@@ -39,6 +39,7 @@ public class RocketController : MonoBehaviour
         // set isgrounded
         isGrounded = Physics2D.OverlapCircle(transform.position, checkRadius, LayerMask.GetMask("Ground"));
     }
+
 
     private void OnDrawGizmosSelected()
     {

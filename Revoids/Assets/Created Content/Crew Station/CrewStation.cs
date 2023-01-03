@@ -17,9 +17,6 @@ public class CrewStation : MonoBehaviour
         {
             // spawm crewmembers
             Instantiate(crewMember, gameObject.transform.position, Quaternion.identity);
-
-            // destroy gameobject
-            Destroy(gameObject);
         }
     }
 }
