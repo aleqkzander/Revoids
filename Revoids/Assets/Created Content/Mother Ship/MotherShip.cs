@@ -18,23 +18,72 @@ public class MotherShip : MonoBehaviour
 
             // clip player
             clipPlayer = true;
+
+            // start unloading crew members every 1 second
+            InvokeRepeating("UnloadCrewMembers", 0.25f, 1f);
         }
     }
 
 
     private void Update()
     {
-        if (clipPlayer)
-        {
-            player.transform.position = clipPoint.transform.position;
-        } 
+        // when player null return
+        if (player == null) return;
+
+        // clip player to ship
+        if (clipPlayer) player.transform.position = clipPoint.transform.position;
     }
 
 
-    public IEnumerator UnloadCrewMembers()
+    private void UnloadCrewMembers()
     {
-        // wait 1 second
-        yield return new WaitForSeconds(1);
+        // get statstic from player
+        RocketStatistic rocketStatistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+        // if no crew members
+        if (rocketStatistic.members == 0) { StartCoroutine(AbroadShip()); }
+
+        // get all uicrewmembers
+        GameObject[] uimembers = GameObject.FindGameObjectsWithTag("CrewDisplay");
+
+        // loop through array
+        foreach (GameObject member in uimembers)
+        {
+            // remove member on rocket
+            rocketStatistic.members--;
+
+            // remove member from ui
+            Destroy(member);
+
+            // break method
+            break;
+        }
     }
 
+
+    private IEnumerator AbroadShip()
+    {
+        clipPlayer = false;
+
+        // get animation
+        Animation animation = gameObject.transform.GetChild(0).GetComponent<Animation>();
+
+        // get animation clip
+        AnimationClip abroad = animation.GetClip("MotherShipAbroad");
+
+        // set current clip
+        animation.clip = abroad;
+
+        // get lenght
+        float animationLenght = abroad.length;
+
+        // play animation
+        animation.Play();
+
+        // wait for animation lenght
+        yield return new WaitForSecondsRealtime(animationLenght);
+
+        // destroy mother ship
+        Destroy(gameObject);
+    }
 }

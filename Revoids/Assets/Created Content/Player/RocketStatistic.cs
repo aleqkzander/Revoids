@@ -5,6 +5,9 @@ using TMPro;
 
 public class RocketStatistic : MonoBehaviour
 {
+    [Header("Mothership")]
+    public GameObject motherShip;
+
     [Header("UI References")]
     public GameObject crewDisplay;
 
@@ -46,6 +49,13 @@ public class RocketStatistic : MonoBehaviour
 
         // increment members
         members++;
+
+        // spawn mothership when membercount is 6
+        if (members == 6)
+        {
+            // spawn
+            Instantiate(motherShip, new Vector2(0, 3), Quaternion.identity);
+        }
 
         // destroy the crew member
         Destroy(pickupedCrew);

@@ -5052,9 +5052,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a145a5f36b89b743ab0dca9128d44c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  motherShip: {fileID: 3081629198630416985, guid: 391e295de93518044902904d3aa1f30e, type: 3}
   crewDisplay: {fileID: 6702086045277341586, guid: ea8be7454b848754b90d295a7cc5dcb6, type: 3}
   score: 0
   members: 0
+  lives: 4
+  rocketShields: 2
 --- !u!1 &4002868546702756825
 GameObject:
   m_ObjectHideFlags: 0
