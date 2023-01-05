@@ -12,7 +12,7 @@ public class RocketController : MonoBehaviour
     [Header("Grounded")]
     [HideInInspector]
     public bool isGrounded;
-    private float checkRadius = 0.5f;
+    private float checkRadius = 0.56f;
 
 
 
