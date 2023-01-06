@@ -51,7 +51,23 @@ public class Bullet : MonoBehaviour
         // when player gets hit by tower
         if (collision.gameObject.CompareTag("Player") && shootFlag == "tower")
         {
-            // rest player
+            // get rocket statistic from collision
+            RocketStatistic statistic = collision.gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+            // check rocket shields
+            if (statistic.rocketShields > 0) 
+            {
+                // subliment shield
+                statistic.rocketShields--;
+
+                // manageui
+
+                // return
+                return;
+            }
+
+
+            // if shield==0 then reset player
             collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerReset();
         }
 

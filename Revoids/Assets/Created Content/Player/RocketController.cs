@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
+    [Header("Joystick")]
+    public Joystick joystick;
+
     new private Rigidbody2D rigidbody;
+    [Header("Movement")]
     public GameObject enginePower;
     public float playerSpeed = 2.0f;
     public float rotationSpeed = 4.0f;
@@ -25,14 +29,33 @@ public class RocketController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // set and apply rotation
-        float rotationAxis = Input.GetAxis("Horizontal");
-        rigidbody.rotation += (-rotationAxis * rotationSpeed);
+        float rotationAxis = 0;
+        Vector2 drive = Vector2.zero;
 
-        // set and apply drive
-        Vector2 drive = new Vector2(0, Input.GetAxis("Vertical"));
-        rigidbody.AddRelativeForce(drive * playerSpeed * 10);
-        
+        if (Application.isMobilePlatform)
+        {
+            // get joystick input
+            rotationAxis = joystick.Horizontal;
+            rigidbody.rotation += (-rotationAxis * rotationSpeed);
+
+            // set and apply drive
+            drive = new Vector2(0, joystick.Vertical);
+            rigidbody.AddRelativeForce(drive * playerSpeed * 10);
+        }
+        else
+        {
+            // disable the joystick when windows
+            joystick.gameObject.SetActive(false);
+
+            // set and apply rotation
+            rotationAxis = Input.GetAxis("Horizontal");
+            rigidbody.rotation += (-rotationAxis * rotationSpeed);
+
+            // set and apply drive
+            drive = new Vector2(0, Input.GetAxis("Vertical"));
+            rigidbody.AddRelativeForce(drive * playerSpeed * 10);
+        }
+
         // activate/deactive engine power
         if (drive.sqrMagnitude > 0) enginePower.SetActive(true); else enginePower.SetActive(false);
 

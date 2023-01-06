@@ -5248,6 +5248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d82f553ebacd346ab587e23858df00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
   enginePower: {fileID: 1346114147}
   playerSpeed: 2
   rotationSpeed: 4
