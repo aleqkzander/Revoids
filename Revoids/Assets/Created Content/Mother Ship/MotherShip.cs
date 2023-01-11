@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MotherShip : MonoBehaviour
 {
+    public GameObject spawner;
     public GameObject clipPoint;
     private bool clipPlayer;
     private GameObject player;
@@ -82,6 +83,9 @@ public class MotherShip : MonoBehaviour
 
         // wait for animation lenght
         yield return new WaitForSecondsRealtime(animationLenght);
+
+        // spawn spawner
+        Instantiate(spawner, new Vector2(0, 13), Quaternion.identity);
 
         // destroy mother ship
         Destroy(gameObject);

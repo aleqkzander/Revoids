@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db144515cab3f7d4e9da01170e242780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 6902411059350020626, guid: 282de61abed28fa40bea93cf1ac853a6, type: 3}
   clipPoint: {fileID: 3081629198681183628}
 --- !u!1 &3081629198681183628
 GameObject:

@@ -53,8 +53,8 @@ public class RocketStatistic : MonoBehaviour
         // spawn mothership when membercount is 6
         if (members == 6)
         {
-            // spawn
-            Instantiate(motherShip, new Vector2(0, 3), Quaternion.identity);
+            // spawn on players x
+            Instantiate(motherShip, new Vector2(gameObject.transform.position.x, 3), Quaternion.identity);
         }
 
         // destroy the crew member
