@@ -37,6 +37,17 @@ public class RocketCollisionDetection : MonoBehaviour
     }
 
 
+    public void ResetSpeed()
+    {
+        // get rigidbody
+        Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
+
+        // reset gloabl velocity
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = 0;
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collisionCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))

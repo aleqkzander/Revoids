@@ -84,8 +84,14 @@ public class MotherShip : MonoBehaviour
         // wait for animation lenght
         yield return new WaitForSecondsRealtime(animationLenght);
 
-        // spawn spawner
-        Instantiate(spawner, new Vector2(0, 13), Quaternion.identity);
+        // instantiate spawner
+        GameObject spawnerObject = Instantiate(spawner, new Vector2(0, 13), Quaternion.identity);
+
+        // get script
+        Spawner spawnerScript = spawnerObject.GetComponent<Spawner>();
+
+        // add one attacktower every time
+        spawnerScript.towerAmount++;
 
         // destroy mother ship
         Destroy(gameObject);

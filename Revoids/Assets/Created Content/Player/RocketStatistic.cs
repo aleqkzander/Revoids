@@ -13,8 +13,8 @@ public class RocketStatistic : MonoBehaviour
 
     [Header("Statistic")]
     public int score;
-    // 8 members required for mother ship
-    public int members;
+    // 6 members required for mother ship
+    public int members = 0;
     // 4 lives is default;
     public int lives = 4;
     // 2 shield default
@@ -54,7 +54,7 @@ public class RocketStatistic : MonoBehaviour
         if (members == 6)
         {
             // spawn on players x
-            Instantiate(motherShip, new Vector2(gameObject.transform.position.x, 3), Quaternion.identity);
+            Instantiate(motherShip, new Vector2(gameObject.transform.position.x, 27), Quaternion.identity);
         }
 
         // destroy the crew member

@@ -61,6 +61,18 @@ public class RocketController : MonoBehaviour
 
         // set isgrounded
         isGrounded = Physics2D.OverlapCircle(transform.position, checkRadius, LayerMask.GetMask("Ground"));
+
+
+        // reset velocity
+        if (isGrounded)
+        {
+            // get collision detector
+            RocketCollisionDetection collisionDetection = gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>();
+
+
+            // reset velocity
+            collisionDetection.ResetSpeed();
+        }
     }
 
 

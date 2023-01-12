@@ -90,6 +90,24 @@ public class Bullet : MonoBehaviour
         }
 
 
+        // if tree gets hit
+        if (collision.gameObject.CompareTag("Tree"))
+        {
+            // if player is shooting add score
+            if (shootFlag == "player")
+            {
+                // get rocket statistic from collision
+                RocketStatistic statistic = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+                // add score
+                statistic.score += 2500;
+            }
+
+            // destroy tree
+            Destroy(collision.gameObject);
+        }
+
+
         // play explosion sound
         Instantiate(explosionSound, transform.position, Quaternion.identity);
 

@@ -9,6 +9,7 @@ TagManager:
   - CrewStation
   - AttackTower
   - CrewDisplay
+  - Tree
   layers:
   - Default
   - TransparentFX
