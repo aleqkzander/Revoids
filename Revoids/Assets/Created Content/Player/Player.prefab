@@ -5053,11 +5053,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motherShip: {fileID: 3081629198630416985, guid: 391e295de93518044902904d3aa1f30e, type: 3}
-  crewDisplay: {fileID: 6702086045277341586, guid: ea8be7454b848754b90d295a7cc5dcb6, type: 3}
-  score: 0
+  scoreText: {fileID: 0}
+  lifeHolder: {fileID: 0}
+  lifeDisplay: {fileID: 1629007897970698313, guid: 09df129c692abeb42bdcd2a10f6c9f82, type: 3}
+  lifes: 3
+  shieldHolder: {fileID: 0}
+  shieldDisplay: {fileID: 2029692145150870932, guid: 79cf126bfee589c4c98466a28a1f5932, type: 3}
+  rocketShields: 3
+  crewHolder: {fileID: 0}
+  crewDisplay: {fileID: 4121163038747445579, guid: 90fee8a325787d4429768187450053bb, type: 3}
   members: 0
-  lives: 4
-  rocketShields: 2
+  score: 0
 --- !u!1 &4002868546702756825
 GameObject:
   m_ObjectHideFlags: 0
@@ -5302,10 +5308,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.4212194, y: -0.24584688}
-  - {x: -0.41483518, y: -0.24175748}
-  - {x: -0.0040920973, y: 0.4464805}
-  - {x: 0.4237027, y: -0.24867271}
+  - {x: 0.4839285, y: -0.24047185}
+  - {x: -0.4683089, y: -0.239777}
+  - {x: -0.0021115988, y: 0.5752136}
+  - {x: 0.48509845, y: -0.23480915}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

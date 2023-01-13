@@ -61,14 +61,19 @@ public class Bullet : MonoBehaviour
                 statistic.rocketShields--;
 
                 // manageui
+                statistic.UpdateUI();
 
-                // return
-                return;
+                // destroy bullet
+                Destroy(gameObject);
             }
+            else if (statistic.rocketShields == 0)
+            {
+                // if shield==0 then reset player
+                StartCoroutine(collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerResetWithDelay(2));
 
-
-            // if shield==0 then reset player
-            collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerReset();
+                // destroy bullet
+                Destroy(gameObject);
+            }
         }
 
 
@@ -80,6 +85,9 @@ public class Bullet : MonoBehaviour
 
             // destroy the crew station
             Destroy(collision.gameObject);
+
+            // destroy bullet
+            Destroy(gameObject);
         }
 
         
@@ -87,6 +95,9 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("AttackTower") && shootFlag == "player")
         {
             Destroy(collision.gameObject);
+
+            // destroy bullet
+            Destroy(gameObject);
         }
 
 
@@ -101,10 +112,16 @@ public class Bullet : MonoBehaviour
 
                 // add score
                 statistic.score += 2500;
+
+                // update ui
+                statistic.UpdateUI();
             }
 
             // destroy tree
             Destroy(collision.gameObject);
+
+            // destroy bullet
+            Destroy(gameObject);
         }
 
 

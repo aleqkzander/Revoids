@@ -10,6 +10,8 @@ TagManager:
   - AttackTower
   - CrewDisplay
   - Tree
+  - LifeDisplay
+  - ShieldDisplay
   layers:
   - Default
   - TransparentFX

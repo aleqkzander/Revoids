@@ -8,19 +8,102 @@ public class RocketStatistic : MonoBehaviour
     [Header("Mothership")]
     public GameObject motherShip;
 
-    [Header("UI References")]
+    [Header("UI Score")]
+    public TMP_Text scoreText;
+
+    [Header("UI Lifes")]
+    public GameObject lifeHolder;
+    public GameObject lifeDisplay;
+    // 3 lives is default;
+    public int lifes = 3;
+
+    [Header("UI Shield")]
+    public GameObject shieldHolder;
+    public GameObject shieldDisplay;
+    // 3 shield default
+    public int rocketShields = 3;
+
+    [Header("UI Crew")]
+    public GameObject crewHolder;
     public GameObject crewDisplay;
+    // 6 members required for mother ship
+    public int members = 0;
 
     [Header("Statistic")]
     public int score;
-    // 6 members required for mother ship
-    public int members = 0;
-    // 4 lives is default;
-    public int lives = 4;
-    // 2 shield default
-    public int rocketShields = 2;
 
-    
+
+    private void Start()
+    {
+        UpdateUI();
+    }
+
+
+    public void UpdateUI()
+    {
+        // set score
+        scoreText.text = "SCORE: " + score.ToString("0000000");
+
+        #region LIFES
+        // detach all lives
+        lifeHolder.transform.DetachChildren();
+
+        // get them after that
+        GameObject[] oldLifes = GameObject.FindGameObjectsWithTag("LifeDisplay");
+
+        // destrory them
+        foreach (GameObject life in oldLifes) Destroy(life);
+
+        // set actual lives
+        for (int i = 0; i < lifes; i++)
+        {
+            GameObject _life = Instantiate(lifeDisplay, Vector2.zero, Quaternion.identity);
+            _life.transform.SetParent(lifeHolder.transform);
+        }
+
+        #endregion
+
+        #region SHIELDS
+        // detach all lives
+        shieldHolder.transform.DetachChildren();
+
+        // get them after that
+        GameObject[] oldShields = GameObject.FindGameObjectsWithTag("ShieldDisplay");
+
+        // destrory them
+        foreach (GameObject shield in oldShields) Destroy(shield);
+
+        // set actual lives
+        for (int i = 0; i < rocketShields; i++)
+        {
+            GameObject _gameobject = Instantiate(shieldDisplay, Vector2.zero, Quaternion.identity);
+            _gameobject.transform.SetParent(shieldHolder.transform);
+        }
+
+        #endregion
+
+        #region CREW
+
+        // detach all lives
+        crewHolder.transform.DetachChildren();
+
+        // get them after that
+        GameObject[] oldMembers = GameObject.FindGameObjectsWithTag("CrewDisplay");
+
+        // destrory them
+        foreach (GameObject member in oldMembers) Destroy(member);
+
+        // set actual crew
+        for (int i = 0; i < members; i++)
+        {
+            GameObject _gameobject = Instantiate(crewDisplay, Vector2.zero, Quaternion.identity);
+            _gameobject.transform.SetParent(crewHolder.transform);
+        }
+
+        #endregion
+    }
+
+
 
     /// <summary>
     /// use this method to add the member
@@ -29,26 +112,10 @@ public class RocketStatistic : MonoBehaviour
     /// <param name="pickupedCrew"></param>
     public void PickupCrewMember(int scorevalue, GameObject pickupedCrew)
     {
-        // set the score on script
-        score += scorevalue;
-
-        // get ui scoretext component from scene
-        GameObject uiscoretext = GameObject.Find("UI_Score");
-
-        // set text to equal to player score
-        uiscoretext.GetComponent<TMP_Text>().text = "SCORE " + score.ToString("0000000000");
-
-        // get ui crewholder component from scene
-        GameObject uicrewholder = GameObject.Find("UI_CrewHolder");
-
-        // spawn uicrewmember
-        GameObject display = Instantiate(crewDisplay, Vector2.zero, Quaternion.identity);
-
-        // add to crew holder as child
-        display.transform.SetParent(uicrewholder.transform);
-
         // increment members
         members++;
+
+        UpdateUI();
 
         // spawn mothership when membercount is 6
         if (members == 6)
@@ -60,6 +127,4 @@ public class RocketStatistic : MonoBehaviour
         // destroy the crew member
         Destroy(pickupedCrew);
     }
-
-
 }
