@@ -67,7 +67,7 @@ public class Bullet : MonoBehaviour
         else if (statistic.rocketShields == 0)
         {
             // if shield==0 then reset player
-            StartCoroutine(collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerResetWithDelay(2));
+            collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerResetWithDelay();
         }
     }
 
@@ -150,6 +150,9 @@ public class Bullet : MonoBehaviour
             TreeHit(collision);
         }
 
+
+        // explosion sound
+        Instantiate(explosionSound, gameObject.transform.position, Quaternion.identity);
 
         // Destroy bullet
         Destroy(gameObject);

@@ -8,6 +8,7 @@ public class RocketCollisionDetection : MonoBehaviour
     public GameObject explosionSound;
     private GameObject player;
     private Vector2 startPosition;
+    public GameObject mainScreen;
 
 
     private void Start()
@@ -17,6 +18,8 @@ public class RocketCollisionDetection : MonoBehaviour
 
         // get start position from player
         startPosition = player.transform.position;
+
+        FreezePlayer();
     }
 
 
@@ -43,7 +46,7 @@ public class RocketCollisionDetection : MonoBehaviour
             if (statistic.rocketShields == 0)
             {
                 // call reset method
-                StartCoroutine(PlayerResetWithDelay(2));
+                PlayerResetWithDelay();
             }
         }
     }
@@ -54,60 +57,25 @@ public class RocketCollisionDetection : MonoBehaviour
     /// </summary>
     /// <param name="delay"></param>
     /// <returns></returns>
-    public IEnumerator PlayerResetWithDelay(float delay)
+    public void PlayerResetWithDelay()
     {
         // get statistic
         RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
 
+        // remove on life
+        statistic.lifes--;
 
-        // get rigidbody
-        Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
+        // reset statistic
+        statistic.rocketShields = 3;
 
-
-        // get modelsprite
-        GameObject model = player.transform.GetChild(0).gameObject;
-
-
-        // disable model
-        model.SetActive(false);
-
-
-        // freeze movement
-        rigidbody.Sleep();
-
-
-        // wait amount of time
-        yield return new WaitForSeconds(delay);
-
+        // freeze player
+        FreezePlayer();
 
         // reset position
         player.transform.position = startPosition;
 
-
-        // reset gloabl velocity
-        rigidbody.velocity = Vector2.zero;
-        rigidbody.angularVelocity = 0;
-
-
-        // reset rotation
-        player.transform.rotation = Quaternion.identity;
-
-
-        // wake up
-        rigidbody.WakeUp();
-
-
-        // eable model
-        model.SetActive(true);
-
-
-        // remove on life
-        statistic.lifes--;
-
-
-        // reset statistic;
-        statistic.rocketShields = 3;
-
+        // Reset speed and rotation
+        ResetSpeedAndRotation();
 
         // update ui
         statistic.UpdateUI();
@@ -152,5 +120,55 @@ public class RocketCollisionDetection : MonoBehaviour
 
         // update ui
         statistic.UpdateUI();
+    }
+
+
+    /// <summary>
+    /// Use to freeze player
+    /// </summary>
+    /// <param name="rigidbody"></param>
+    public void FreezePlayer()
+    {
+        // get rigidbody
+        Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
+
+        // get modelsprite
+        GameObject model = player.transform.GetChild(0).gameObject;
+
+        // activate gameover screen
+        mainScreen.SetActive(true);
+
+        // disable model
+        model.SetActive(false);
+
+        // freeze movement
+        rigidbody.Sleep();
+
+        // remove simulation
+        rigidbody.simulated = false;
+    }
+
+
+    /// <summary>
+    /// Use to unfreeze player
+    /// </summary>
+    public void UnfreezePlayer()
+    {
+        // get rigidbody
+        Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
+
+
+        // get modelsprite
+        GameObject model = player.transform.GetChild(0).gameObject;
+
+        // wake up
+        rigidbody.WakeUp();
+
+
+        // eable model
+        model.SetActive(true);
+
+        // remove simulation
+        rigidbody.simulated = true;
     }
 }
