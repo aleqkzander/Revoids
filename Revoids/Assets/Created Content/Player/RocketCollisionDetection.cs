@@ -20,6 +20,40 @@ public class RocketCollisionDetection : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collisionCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+
+            // get statistic
+            RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+
+            // play explosion sound
+            Instantiate(explosionSound, gameObject.transform.position, Quaternion.identity);
+
+
+            // remove a rocketshield
+            if (statistic.rocketShields > 0)
+            {
+                RemoveRocketShield(statistic);
+            }
+
+
+            if (statistic.rocketShields == 0)
+            {
+                // call reset method
+                StartCoroutine(PlayerResetWithDelay(2));
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Use this method to reset player position and update the ui
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <returns></returns>
     public IEnumerator PlayerResetWithDelay(float delay)
     {
         // get statistic
@@ -42,6 +76,7 @@ public class RocketCollisionDetection : MonoBehaviour
         rigidbody.Sleep();
 
 
+        // wait amount of time
         yield return new WaitForSeconds(delay);
 
 
@@ -64,7 +99,6 @@ public class RocketCollisionDetection : MonoBehaviour
 
         // eable model
         model.SetActive(true);
-        //model.enabled = true;
 
 
         // remove on life
@@ -80,7 +114,10 @@ public class RocketCollisionDetection : MonoBehaviour
     }
 
 
-    public void ResetSpeed()
+    /// <summary>
+    /// Use method to reset speed and rotation
+    /// </summary>
+    public void ResetSpeedAndRotation()
     {
         // get rigidbody
         Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
@@ -88,45 +125,32 @@ public class RocketCollisionDetection : MonoBehaviour
         // reset gloabl velocity
         rigidbody.velocity = Vector2.zero;
         rigidbody.angularVelocity = 0;
+
+        // reset rotation
+        player.transform.rotation = Quaternion.identity;
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// Use this method to remove a rocketshield
+    /// </summary>
+    /// <param name="statistic"></param>
+    private void RemoveRocketShield(RocketStatistic statistic)
     {
-        if (collisionCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            // get statistic
-            RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
+        // remove one shield
+        statistic.rocketShields--;
 
-            // play explosion sound
-            Instantiate(explosionSound, gameObject.transform.position, Quaternion.identity);
+        // get rigidbody
+        Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
 
+        // reset gloabl velocity
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = 0;
 
-            if (statistic.lifes > 0)
-            {
-                statistic.lifes--;
+        // reset rotation
+        player.transform.rotation = Quaternion.identity;
 
-                // get rigidbody
-                Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
-
-                // reset gloabl velocity
-                rigidbody.velocity = Vector2.zero;
-                rigidbody.angularVelocity = 0;
-
-                // reset rotation
-                player.transform.rotation = Quaternion.identity;
-
-                // update ui
-                statistic.UpdateUI();
-            }
-            else if (statistic.lifes == 0)
-            {
-                // call reset method
-                StartCoroutine(PlayerResetWithDelay(2));
-
-                // update ui
-                statistic.UpdateUI();
-            }
-        }
+        // update ui
+        statistic.UpdateUI();
     }
 }

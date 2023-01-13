@@ -46,96 +46,112 @@ public class Bullet : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Call method on player hit
+    /// </summary>
+    /// <param name="collision"></param>
+    public void PlayerHit(Collision2D collision)
+    {
+        // get rocket statistic from collision
+        RocketStatistic statistic = collision.gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+        // check rocket shields
+        if (statistic.rocketShields > 0)
+        {
+            // subliment shield
+            statistic.rocketShields--;
+
+            // manageui
+            statistic.UpdateUI();
+        }
+        else if (statistic.rocketShields == 0)
+        {
+            // if shield==0 then reset player
+            StartCoroutine(collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerResetWithDelay(2));
+        }
+    }
+
+
+    /// <summary>
+    /// Call method on crewstation hit
+    /// </summary>
+    /// <param name="collision"></param>
+    public void CrewStationHit(Collision2D collision)
+    {
+        // call method from crew station 
+        collision.gameObject.GetComponent<CrewStation>().SpawnCrewMembers();
+
+        // destroy the crew station
+        Destroy(collision.gameObject);
+    }
+
+
+    /// <summary>
+    /// Call methon on tower hit
+    /// </summary>
+    /// <param name="collision"></param>
+    public void TowerHit(Collision2D collision)
+    {
+        // destor the tower
+        Destroy(collision.gameObject);
+    }
+
+
+    /// <summary>
+    /// Call this method on tree hit
+    /// </summary>
+    /// <param name="collision"></param>
+    public void TreeHit(Collision2D collision)
+    {
+        // if player is shooting add score
+        if (shootFlag == "player")
+        {
+            // get rocket statistic from collision
+            RocketStatistic statistic = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+            // add score
+            statistic.score += 2500;
+
+            // update ui
+            statistic.UpdateUI();
+        }
+
+        // destroy tree
+        Destroy(collision.gameObject);
+    }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // when player gets hit by tower
         if (collision.gameObject.CompareTag("Player") && shootFlag == "tower")
         {
-            // get rocket statistic from collision
-            RocketStatistic statistic = collision.gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
-
-            // check rocket shields
-            if (statistic.rocketShields > 0) 
-            {
-                // subliment shield
-                statistic.rocketShields--;
-
-                // manageui
-                statistic.UpdateUI();
-
-                // destroy bullet
-                Destroy(gameObject);
-            }
-            else if (statistic.rocketShields == 0)
-            {
-                // if shield==0 then reset player
-                StartCoroutine(collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerResetWithDelay(2));
-
-                // destroy bullet
-                Destroy(gameObject);
-            }
+            PlayerHit(collision);
         }
 
 
         // when crew station gets hit by player
         if (collision.gameObject.CompareTag("CrewStation") && shootFlag == "player")
         {
-            // call method from crew station 
-            collision.gameObject.GetComponent<CrewStation>().SpawnCrewMembers();
-
-            // destroy the crew station
-            Destroy(collision.gameObject);
-
-            // destroy bullet
-            Destroy(gameObject);
+            CrewStationHit(collision);
         }
 
         
         // if attack tower gets hit by player
         if (collision.gameObject.CompareTag("AttackTower") && shootFlag == "player")
         {
-            Destroy(collision.gameObject);
-
-            // destroy bullet
-            Destroy(gameObject);
+            TowerHit(collision);
         }
 
 
         // if tree gets hit
         if (collision.gameObject.CompareTag("Tree"))
         {
-            // if player is shooting add score
-            if (shootFlag == "player")
-            {
-                // get rocket statistic from collision
-                RocketStatistic statistic = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
-
-                // add score
-                statistic.score += 2500;
-
-                // update ui
-                statistic.UpdateUI();
-            }
-
-            // destroy tree
-            Destroy(collision.gameObject);
-
-            // destroy bullet
-            Destroy(gameObject);
+            TreeHit(collision);
         }
 
 
-        // play explosion sound
-        Instantiate(explosionSound, transform.position, Quaternion.identity);
-
-
         // Destroy bullet
-        Destroy(gameObject);
-    }
-
-
-    private void DestroyBullet()
-    {
         Destroy(gameObject);
     }
 }

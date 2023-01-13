@@ -35,14 +35,20 @@ public class RocketStatistic : MonoBehaviour
 
     private void Start()
     {
+        // update on first frame
         UpdateUI();
     }
 
 
+    /// <summary>
+    /// Update the ui
+    /// </summary>
     public void UpdateUI()
     {
+        #region SCORE
         // set score
         scoreText.text = "SCORE: " + score.ToString("0000000");
+        #endregion
 
         #region LIFES
         // detach all lives
@@ -104,7 +110,6 @@ public class RocketStatistic : MonoBehaviour
     }
 
 
-
     /// <summary>
     /// use this method to add the member
     /// </summary>
@@ -115,6 +120,7 @@ public class RocketStatistic : MonoBehaviour
         // increment members
         members++;
 
+        // update ui
         UpdateUI();
 
         // spawn mothership when membercount is 6

@@ -70,8 +70,8 @@ public class RocketController : MonoBehaviour
             RocketCollisionDetection collisionDetection = gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>();
 
 
-            // reset velocity
-            collisionDetection.ResetSpeed();
+            // reset speed and rotation
+            collisionDetection.ResetSpeedAndRotation();
         }
     }
 

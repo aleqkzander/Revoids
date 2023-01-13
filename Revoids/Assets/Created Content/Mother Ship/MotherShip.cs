@@ -36,6 +36,9 @@ public class MotherShip : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Use this method to call abroadship to unlead crewmembers
+    /// </summary>
     private void UnloadCrewMembers()
     {
         // get statstic from player
@@ -62,6 +65,10 @@ public class MotherShip : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Getting called by unleadcrewmembers
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator AbroadShip()
     {
         clipPlayer = false;

@@ -16,6 +16,9 @@ public class AttackTower : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Search player and shoot
+    /// </summary>
     private void CheckForPlayerAndShoot()
     {
         // check for player
