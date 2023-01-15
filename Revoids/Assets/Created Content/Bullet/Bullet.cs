@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Bullet : MonoBehaviour
 {
     public GameObject explosionSound;
     private string shootFlag = string.Empty;
+
+    [Header("Light")]
+    public Light2D light2D;
 
     private void Start()
     {
