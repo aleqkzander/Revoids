@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         shootFlag = "player";
 
         // fire bullet
-        GetComponent<Rigidbody2D>().AddRelativeForce(shootingPoint.transform.up * 40f, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddRelativeForce(shootingPoint.transform.up * 30f, ForceMode2D.Impulse);
     }
 
 
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
         Vector2 direction = playerPosition.transform.position - shootingPoint.transform.position;
 
         // shoot bullet
-        GetComponent<Rigidbody2D>().AddRelativeForce(direction * 5f, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddRelativeForce(direction * 4.5f, ForceMode2D.Impulse);
     }
 
 
