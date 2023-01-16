@@ -68,7 +68,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4abedea146e527a4abc4d9d5112f74e3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 2
   Loop: 0
   Mute: 0
@@ -166,9 +166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionSound: {fileID: 3463329715949099766, guid: 50ccab7478ed78d46a0848c750ccbb9c, type: 3}
   light2D: {fileID: 6510509155703231192}
-  bulletColor:
-  - {r: 0, g: 1, b: 0.85882354, a: 0}
-  - {r: 0.9372549, g: 1, b: 0, a: 0}
 --- !u!1 &6510509155703231196
 GameObject:
   m_ObjectHideFlags: 0
