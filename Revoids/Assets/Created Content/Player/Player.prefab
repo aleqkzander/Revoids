@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541419190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5134,9 +5134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motherShip: {fileID: 3081629198630416985, guid: 391e295de93518044902904d3aa1f30e, type: 3}
   scoreText: {fileID: 0}
-  lifeHolder: {fileID: 0}
-  lifeDisplay: {fileID: 1629007897970698313, guid: 09df129c692abeb42bdcd2a10f6c9f82, type: 3}
-  lifes: 3
   shieldHolder: {fileID: 0}
   shieldDisplay: {fileID: 2029692145150870932, guid: 79cf126bfee589c4c98466a28a1f5932, type: 3}
   rocketShields: 3
@@ -5320,7 +5317,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &4002868547769432321
 MonoBehaviour:

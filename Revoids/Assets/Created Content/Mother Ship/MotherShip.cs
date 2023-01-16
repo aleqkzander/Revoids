@@ -9,6 +9,10 @@ public class MotherShip : MonoBehaviour
     private bool clipPlayer;
     private GameObject player;
 
+    [Header("Sounds")]
+    public AudioSource engineAudio;
+    public AudioSource memberAbroad;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -55,6 +59,9 @@ public class MotherShip : MonoBehaviour
         {
             // remove member on rocket
             rocketStatistic.members--;
+
+            // play sound
+            memberAbroad.Play();
 
             // remove member from ui
             Destroy(member);

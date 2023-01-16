@@ -11,10 +11,13 @@ public class Bullet : MonoBehaviour
     [Header("Light")]
     public Light2D light2D;
 
-    private void Start()
+
+    /// <summary>
+    /// Destroy when bullet no longer visible by the camera
+    /// </summary>
+    private void OnBecameInvisible()
     {
-        // destroy bullet in 2 seconds
-        Invoke("DestroyBullet", 2);
+        Destroy(gameObject);
     }
 
 
@@ -28,7 +31,7 @@ public class Bullet : MonoBehaviour
         shootFlag = "player";
 
         // fire bullet
-        GetComponent<Rigidbody2D>().AddRelativeForce(shootingPoint.transform.up * 20, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddRelativeForce(shootingPoint.transform.up * 40f, ForceMode2D.Impulse);
     }
 
 
@@ -46,7 +49,7 @@ public class Bullet : MonoBehaviour
         Vector2 direction = playerPosition.transform.position - shootingPoint.transform.position;
 
         // shoot bullet
-        GetComponent<Rigidbody2D>().AddRelativeForce(direction * 3.5f, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddRelativeForce(direction * 5f, ForceMode2D.Impulse);
     }
 
 

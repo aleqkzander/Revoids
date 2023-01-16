@@ -62,11 +62,11 @@ public class RocketCollisionDetection : MonoBehaviour
         // get statistic
         RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
 
-        // remove on life
-        statistic.lifes--;
-
         // reset statistic
         statistic.rocketShields = 3;
+
+        // reset score
+        statistic.score = 0;
 
         // freeze player
         FreezePlayer();

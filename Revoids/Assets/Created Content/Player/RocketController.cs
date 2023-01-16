@@ -12,6 +12,8 @@ public class RocketController : MonoBehaviour
     public GameObject enginePower;
     public float playerSpeed = 2.0f;
     public float rotationSpeed = 4.0f;
+    private float _rotationAxis;
+    private Vector2 _drive;
 
     [Header("Grounded")]
     [HideInInspector]
@@ -24,40 +26,52 @@ public class RocketController : MonoBehaviour
     {
         // get rigidbody;
         rigidbody = GetComponent<Rigidbody2D>();
+
+
+        // activate joystick when mobile
+        if (Application.isMobilePlatform)
+        {
+            joystick.gameObject.SetActive(true);
+        }
+    }
+
+
+    private void Update()
+    {
+        // consume input 
+
+        if (Application.isMobilePlatform)
+        {
+            // set input
+            _rotationAxis = joystick.Horizontal;
+
+            // set drive
+            _drive = new Vector2(0, joystick.Vertical);
+        }
+        else
+        {
+            // set rotation
+            _rotationAxis = Input.GetAxis("Horizontal");
+
+            // set drive
+            _drive = new Vector2(0, Input.GetAxis("Vertical"));
+        }
     }
 
 
     private void FixedUpdate()
     {
-        float rotationAxis = 0;
-        Vector2 drive = Vector2.zero;
+        // apply rotation
+        rigidbody.rotation += (-_rotationAxis * rotationSpeed);
 
-        if (Application.isMobilePlatform)
-        {
-            // get joystick input
-            rotationAxis = joystick.Horizontal;
-            rigidbody.rotation += (-rotationAxis * rotationSpeed);
 
-            // set and apply drive
-            drive = new Vector2(0, joystick.Vertical);
-            rigidbody.AddRelativeForce(drive * playerSpeed * 10);
-        }
-        else
-        {
-            // disable the joystick when windows
-            joystick.gameObject.SetActive(false);
+        // apply drive
+        rigidbody.AddRelativeForce(_drive * playerSpeed * 10);
 
-            // set and apply rotation
-            rotationAxis = Input.GetAxis("Horizontal");
-            rigidbody.rotation += (-rotationAxis * rotationSpeed);
-
-            // set and apply drive
-            drive = new Vector2(0, Input.GetAxis("Vertical"));
-            rigidbody.AddRelativeForce(drive * playerSpeed * 10);
-        }
 
         // activate/deactive engine power
-        if (drive.sqrMagnitude > 0) enginePower.SetActive(true); else enginePower.SetActive(false);
+        if (_drive.sqrMagnitude > 0) enginePower.SetActive(true); else enginePower.SetActive(false);
+
 
         // set isgrounded
         isGrounded = Physics2D.OverlapCircle(transform.position, checkRadius, LayerMask.GetMask("Ground"));

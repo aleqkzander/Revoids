@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 869373398307362754, guid: 04e56b31bf428b6409a34bc3fb7196ec, type: 3}
       propertyPath: m_Name
-      value: Bullet-Player
+      value: Bullet-Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 869373398307362765, guid: 04e56b31bf428b6409a34bc3fb7196ec, type: 3}
       propertyPath: m_RootOrder
@@ -62,6 +62,10 @@ PrefabInstance:
     - target: {fileID: 6510509155703231192, guid: 04e56b31bf428b6409a34bc3fb7196ec, type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510509155703231192, guid: 04e56b31bf428b6409a34bc3fb7196ec, type: 3}
+      propertyPath: m_Intensity
+      value: 14.46
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e56b31bf428b6409a34bc3fb7196ec, type: 3}

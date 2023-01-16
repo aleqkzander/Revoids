@@ -12,8 +12,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3583183142161754949, guid: 9b6c1fb17ce299848a12c630cce42fd0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.015461222
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583183142161754949, guid: 9b6c1fb17ce299848a12c630cce42fd0, type: 3}
       propertyPath: m_Color.r
-      value: 0.8745098
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583183142161754949, guid: 9b6c1fb17ce299848a12c630cce42fd0, type: 3}
+      propertyPath: m_Intensity
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7490433957367803472, guid: 9b6c1fb17ce299848a12c630cce42fd0, type: 3}
       propertyPath: m_RootOrder
@@ -73,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7490433957367803487, guid: 9b6c1fb17ce299848a12c630cce42fd0, type: 3}
       propertyPath: m_Name
-      value: Bullet-Tower
+      value: Bullet-Tower Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b6c1fb17ce299848a12c630cce42fd0, type: 3}

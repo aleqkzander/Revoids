@@ -11,12 +11,6 @@ public class RocketStatistic : MonoBehaviour
     [Header("UI Score")]
     public TMP_Text scoreText;
 
-    [Header("UI Lifes")]
-    public GameObject lifeHolder;
-    public GameObject lifeDisplay;
-    // 3 lives is default;
-    public int lifes = 3;
-
     [Header("UI Shield")]
     public GameObject shieldHolder;
     public GameObject shieldDisplay;
@@ -48,25 +42,6 @@ public class RocketStatistic : MonoBehaviour
         #region SCORE
         // set score
         scoreText.text = "SCORE: " + score.ToString("0000000");
-        #endregion
-
-        #region LIFES
-        // detach all lives
-        lifeHolder.transform.DetachChildren();
-
-        // get them after that
-        GameObject[] oldLifes = GameObject.FindGameObjectsWithTag("LifeDisplay");
-
-        // destrory them
-        foreach (GameObject life in oldLifes) Destroy(life);
-
-        // set actual lives
-        for (int i = 0; i < lifes; i++)
-        {
-            GameObject _life = Instantiate(lifeDisplay, Vector2.zero, Quaternion.identity);
-            _life.transform.SetParent(lifeHolder.transform);
-        }
-
         #endregion
 
         #region SHIELDS
