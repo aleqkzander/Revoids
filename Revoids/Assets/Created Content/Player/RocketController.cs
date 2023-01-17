@@ -16,9 +16,8 @@ public class RocketController : MonoBehaviour
     private Vector2 _drive;
 
     [Header("Grounded")]
-    [HideInInspector]
     public bool isGrounded;
-    private float checkRadius = 0.56f;
+    public float checkRadius = 0.6f;
 
 
 
@@ -80,12 +79,14 @@ public class RocketController : MonoBehaviour
         // reset velocity
         if (isGrounded)
         {
+            #region dont reset anymore
             // get collision detector
-            RocketCollisionDetection collisionDetection = gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>();
+            //RocketCollisionDetection collisionDetection = gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>();
 
 
             // reset speed and rotation
-            collisionDetection.ResetSpeedAndRotation();
+            //collisionDetection.ResetSpeedAndRotation();
+            #endregion
         }
     }
 

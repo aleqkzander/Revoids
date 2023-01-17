@@ -4925,7 +4925,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6850867eb05532a4fa20a6eb514d1e9e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.01
+  m_Volume: 0.15
   m_Pitch: 2
   Loop: 1
   Mute: 0
@@ -5336,6 +5336,7 @@ MonoBehaviour:
   playerSpeed: 2
   rotationSpeed: 4
   isGrounded: 0
+  checkRadius: 0.6
 --- !u!1 &4443820052188262929
 GameObject:
   m_ObjectHideFlags: 0
@@ -5385,10 +5386,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.4839285, y: -0.24047185}
-  - {x: -0.4683089, y: -0.239777}
-  - {x: -0.0021115988, y: 0.5752136}
-  - {x: 0.48509845, y: -0.23480915}
+  - {x: 0.5, y: -0.3}
+  - {x: -0.5, y: -0.3}
+  - {x: 0, y: 0.6}
+  - {x: 0.5, y: -0.3}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

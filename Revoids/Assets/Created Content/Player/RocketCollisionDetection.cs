@@ -19,7 +19,17 @@ public class RocketCollisionDetection : MonoBehaviour
         // get start position from player
         startPosition = player.transform.position;
 
+        // Freeze the player on start
         FreezePlayer();
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            PlayerResetWithDelay();
+        }
     }
 
 
@@ -27,7 +37,6 @@ public class RocketCollisionDetection : MonoBehaviour
     {
         if (collisionCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-
             // get statistic
             RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
 
@@ -96,6 +105,9 @@ public class RocketCollisionDetection : MonoBehaviour
 
         // reset rotation
         player.transform.rotation = Quaternion.identity;
+
+        // clear position
+        player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 3);
     }
 
 

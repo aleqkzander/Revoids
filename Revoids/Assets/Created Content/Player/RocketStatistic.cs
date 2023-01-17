@@ -59,6 +59,7 @@ public class RocketStatistic : MonoBehaviour
         {
             GameObject _gameobject = Instantiate(shieldDisplay, Vector2.zero, Quaternion.identity);
             _gameobject.transform.SetParent(shieldHolder.transform);
+            _gameobject.transform.localScale = Vector3.one;
         }
 
         #endregion
@@ -79,6 +80,7 @@ public class RocketStatistic : MonoBehaviour
         {
             GameObject _gameobject = Instantiate(crewDisplay, Vector2.zero, Quaternion.identity);
             _gameobject.transform.SetParent(crewHolder.transform);
+            _gameobject.transform.localScale = Vector3.one;
         }
 
         #endregion
