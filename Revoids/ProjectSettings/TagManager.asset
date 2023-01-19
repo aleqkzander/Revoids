@@ -12,6 +12,7 @@ TagManager:
   - Tree
   - LifeDisplay
   - ShieldDisplay
+  - Music
   layers:
   - Default
   - TransparentFX
