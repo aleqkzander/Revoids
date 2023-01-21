@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
-    [Header("Joystick")]
+    [Header("MobileControll")]
     public Joystick joystick;
+    public GameObject powerButton;
+    public GameObject shootButton;
 
     new private Rigidbody2D rigidbody;
     [Header("Movement")]
@@ -28,9 +30,11 @@ public class RocketController : MonoBehaviour
 
 
         // activate joystick when mobile
-        if (Application.isMobilePlatform)
+        if (!Application.isMobilePlatform)
         {
-            joystick.gameObject.SetActive(true);
+            joystick.gameObject.SetActive(false);
+            powerButton.SetActive(false);
+            shootButton.SetActive(false);
         }
     }
 
@@ -43,9 +47,6 @@ public class RocketController : MonoBehaviour
         {
             // set input
             _rotationAxis = joystick.Horizontal;
-
-            // set drive
-            _drive = new Vector2(0, joystick.Vertical);
         }
         else
         {
@@ -55,6 +56,16 @@ public class RocketController : MonoBehaviour
             // set drive
             _drive = new Vector2(0, Input.GetAxis("Vertical"));
         }
+    }
+
+    public void DriverOn()
+    {
+        _drive = new Vector2(0, 1);
+    }
+
+    public void DriverOff()
+    {
+        _drive = new Vector2(0, 0);
     }
 
 
