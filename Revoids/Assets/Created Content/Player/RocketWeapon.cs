@@ -7,7 +7,6 @@ public class RocketWeapon : MonoBehaviour
     public Transform shootingPoint;
     public GameObject playerBullet;
     public GameObject shootButton;
-    public GameObject shootButtonImage;
 
 
     private void Awake()

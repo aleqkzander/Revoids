@@ -1,4 +1,4 @@
-Library: C:\Users\alexa\OneDrive\Dokumente\GitHub\Revoids\Revoids\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
+Library: D:\Revoids\Revoids\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
 --platform=Android
 --backend=burst-llvm-14
 --target=ARMV7A_NEON32
@@ -143,9 +143,9 @@ Library: C:\Users\alexa\OneDrive\Dokumente\GitHub\Revoids\Revoids\Temp\StagingAr
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --compilation-defines=ENABLE_URP
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=C:\Users\alexa\OneDrive\Dokumente\GitHub\Revoids\Revoids\Temp\Burst
+--temp-folder=D:\Revoids\Revoids\Temp\Burst
 --debug=Full
---output=C:\Users\alexa\OneDrive\Dokumente\GitHub\Revoids\Revoids\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
+--output=D:\Revoids\Revoids\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 --pdb-search-paths=Temp/ManagedSymbols/
 

@@ -7,7 +7,6 @@ public class RocketController : MonoBehaviour
     [Header("MobileControll")]
     public Joystick joystick;
     public GameObject driveButton;
-    public GameObject driveButtonImage;
 
     new private Rigidbody2D rigidbody;
     [Header("Movement")]
@@ -62,9 +61,6 @@ public class RocketController : MonoBehaviour
     {
         // set drive in mobile
         _drive = new Vector2(0, 1);
-
-        // enable button
-        driveButtonImage.SetActive(true);
     }
 
 
@@ -72,9 +68,6 @@ public class RocketController : MonoBehaviour
     {
         // set drive in mobile
         _drive = new Vector2(0, 0);
-
-        // disable button
-        driveButtonImage.SetActive(false);
     }
 
 
