@@ -6,7 +6,14 @@ public class RocketWeapon : MonoBehaviour
 {
     public Transform shootingPoint;
     public GameObject playerBullet;
+    public GameObject shootButton;
+    public GameObject shootButtonImage;
 
+
+    private void Awake()
+    {
+        if (!Application.isMobilePlatform) shootButton.SetActive(false);
+    }
 
     private void Update()
     {

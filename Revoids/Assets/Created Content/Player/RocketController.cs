@@ -6,16 +6,16 @@ public class RocketController : MonoBehaviour
 {
     [Header("MobileControll")]
     public Joystick joystick;
-    public GameObject powerButton;
-    public GameObject shootButton;
+    public GameObject driveButton;
+    public GameObject driveButtonImage;
 
     new private Rigidbody2D rigidbody;
     [Header("Movement")]
     public GameObject enginePower;
     public float playerSpeed = 2.0f;
     public float rotationSpeed = 4.0f;
-    private float _rotationAxis;
     private Vector2 _drive;
+    private float _rotationAxis;
 
     [Header("Grounded")]
     public bool isGrounded;
@@ -33,8 +33,7 @@ public class RocketController : MonoBehaviour
         if (!Application.isMobilePlatform)
         {
             joystick.gameObject.SetActive(false);
-            powerButton.SetActive(false);
-            shootButton.SetActive(false);
+            driveButton.SetActive(false);
         }
     }
 
@@ -45,27 +44,37 @@ public class RocketController : MonoBehaviour
 
         if (Application.isMobilePlatform)
         {
-            // set input
+            // set rotation
             _rotationAxis = joystick.Horizontal;
         }
         else
         {
-            // set rotation
-            _rotationAxis = Input.GetAxis("Horizontal");
-
             // set drive
             _drive = new Vector2(0, Input.GetAxis("Vertical"));
+
+            // set rotation
+            _rotationAxis = Input.GetAxis("Horizontal");
         }
     }
 
-    public void DriverOn()
+
+    public void ApplyDrive()
     {
+        // set drive in mobile
         _drive = new Vector2(0, 1);
+
+        // enable button
+        driveButtonImage.SetActive(true);
     }
 
-    public void DriverOff()
+
+    public void RemoveDrive()
     {
+        // set drive in mobile
         _drive = new Vector2(0, 0);
+
+        // disable button
+        driveButtonImage.SetActive(false);
     }
 
 

@@ -30,6 +30,11 @@ public class RocketCollisionDetection : MonoBehaviour
         {
             PlayerResetWithDelay();
         }
+
+        if (Input.touchCount == 3)
+        {
+            FreezePlayer();
+        }
     }
 
 
