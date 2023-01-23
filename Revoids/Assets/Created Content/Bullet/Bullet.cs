@@ -85,6 +85,19 @@ public class Bullet : MonoBehaviour
     /// <param name="collision"></param>
     public void CrewStationHit(Collision2D collision)
     {
+        // if player is shooting add score
+        if (shootFlag == "player")
+        {
+            // get rocket statistic from collision
+            RocketStatistic statistic = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+            // add score
+            statistic.score += 500;
+
+            // update ui
+            statistic.UpdateUI();
+        }
+
         // call method from crew station 
         collision.gameObject.GetComponent<CrewStation>().SpawnCrewMembers();
 
@@ -99,6 +112,19 @@ public class Bullet : MonoBehaviour
     /// <param name="collision"></param>
     public void TowerHit(Collision2D collision)
     {
+        // if player is shooting add score
+        if (shootFlag == "player")
+        {
+            // get rocket statistic from collision
+            RocketStatistic statistic = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
+
+            // add score
+            statistic.score += 5000;
+
+            // update ui
+            statistic.UpdateUI();
+        }
+
         // destor the tower
         Destroy(collision.gameObject);
     }

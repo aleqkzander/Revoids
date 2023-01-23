@@ -12,10 +12,9 @@ public class RocketStatistic : MonoBehaviour
     public TMP_Text scoreText;
 
     [Header("UI Shield")]
-    public GameObject shieldHolder;
-    public GameObject shieldDisplay;
-    // 3 shield default
-    public int rocketShields = 3;
+    public GameObject shieldHolder; // only needed for rotation
+    public List<GameObject> rocketShieldsDisplay;
+    public int rocketShields = 4;
 
     [Header("UI Crew")]
     public GameObject crewHolder;
@@ -34,34 +33,20 @@ public class RocketStatistic : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        shieldHolder.transform.position = gameObject.transform.position;
+    }
+
+
     /// <summary>
-    /// Update the ui
+    /// Update the ui and rocketshield display
     /// </summary>
     public void UpdateUI()
     {
         #region SCORE
         // set score
         scoreText.text = "SCORE: " + score.ToString("0000000");
-        #endregion
-
-        #region SHIELDS
-        // detach all lives
-        shieldHolder.transform.DetachChildren();
-
-        // get them after that
-        GameObject[] oldShields = GameObject.FindGameObjectsWithTag("ShieldDisplay");
-
-        // destrory them
-        foreach (GameObject shield in oldShields) Destroy(shield);
-
-        // set actual lives
-        for (int i = 0; i < rocketShields; i++)
-        {
-            GameObject _gameobject = Instantiate(shieldDisplay, Vector2.zero, Quaternion.identity);
-            _gameobject.transform.SetParent(shieldHolder.transform);
-            _gameobject.transform.localScale = Vector3.one;
-        }
-
         #endregion
 
         #region CREW
@@ -84,6 +69,20 @@ public class RocketStatistic : MonoBehaviour
         }
 
         #endregion
+
+        #region SHIELDS
+        // deactivate every shield display
+        foreach (GameObject shield in rocketShieldsDisplay)
+        {
+            shield.SetActive(false);
+        }
+
+        // activate the current amount of shields
+        for (int i = 0; i < rocketShields; i++)
+        {
+            rocketShieldsDisplay[i].gameObject.SetActive(true);
+        }
+        #endregion
     }
 
 
@@ -96,6 +95,9 @@ public class RocketStatistic : MonoBehaviour
     {
         // increment members
         members++;
+
+        // add score value
+        score += scorevalue;
 
         // update ui
         UpdateUI();
