@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
+
+public enum PrivacyState
+{
+    accpeted,
+    notaccepted
+}
+
 
 public class PrivacySettings : MonoBehaviour
 {
     public PlayerSaveFile playerPrefs;
-    private List<string> privacyNotice;
-
 
     private void Start()
     {
@@ -19,7 +25,7 @@ public class PrivacySettings : MonoBehaviour
     /// </summary>
     public void CheckStatus()
     {
-        if (playerPrefs.privacyNotice == privacyNotice[1])
+        if (playerPrefs.privacyNotice == PrivacyState.accpeted.ToString())
         {
             gameObject.SetActive(false);
         }
@@ -29,18 +35,44 @@ public class PrivacySettings : MonoBehaviour
     /// <summary>
     ///  set state in playerprefs
     /// </summary>
-    public void UnderstandNotice() 
+    public void Accept() 
     {
-        playerPrefs.SetPrivacyNotice(privacyNotice[1]);
+        // if the user opts in to targeted advertising:
+        MetaData gdprMetaData = new MetaData("gdpr");
+        gdprMetaData.Set("consent", "true");
+        Advertisement.SetMetaData(gdprMetaData);
+
+        // save internally
+        playerPrefs.SetPrivacyNotice(PrivacyState.accpeted.ToString());
+        playerPrefs.privacyNotice = PrivacyState.accpeted.ToString();
         CheckStatus();
     }
 
 
     /// <summary>
-    ///  use to quit the game
+    /// open link for more information
     /// </summary>
-    public void ExitGame()
+    /// <param name="link"></param>
+    public void OpenLink(string link)
     {
+        Application.OpenURL(link);
+    }
+
+
+    /// <summary>
+    ///  use to opt-out and quit the game
+    /// </summary>
+    public void OptOut()
+    {
+        // if the user opts out of targeted advertising:
+        MetaData gdprMetaData = new MetaData("gdpr");
+        gdprMetaData.Set("consent", "false");
+        Advertisement.SetMetaData(gdprMetaData);
+
+        // delete data
+        PlayerPrefs.DeleteAll();
+
+        // quit
         Application.Quit();
     }
 }

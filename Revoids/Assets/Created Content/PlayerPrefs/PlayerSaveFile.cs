@@ -2,23 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PrefsKey
+[SerializeField]
+public class SaveFile
 {
-    privacynotice,
-    playerscore
+    [Header("Player Preferences Keys")]
+    public string privacyNotice = "privacynotice";
+    public string playerScore = "playerscore";
+    public string playerAudio = "playeraudio";
 }
 
 public class PlayerSaveFile : MonoBehaviour
 {
-    public string privacyNotice = "Default";
+    public SaveFile saveFile = new SaveFile();
+    public string privacyNotice = "";
     public int playerScore = 0;
+    public string audioState = "audio=true";
 
     private void Start()
     {
-        privacyNotice = PlayerPrefs.GetString(PrefsKey.privacynotice.ToString());
-        playerScore = PlayerPrefs.GetInt(PrefsKey.playerscore.ToString());
-
-        if (privacyNotice == string.Empty) privacyNotice = "not understood";
+        privacyNotice = PlayerPrefs.GetString(saveFile.privacyNotice);
+        playerScore = PlayerPrefs.GetInt(saveFile.playerScore);
+        audioState = PlayerPrefs.GetString(saveFile.playerAudio);
     }
 
 
@@ -28,7 +32,7 @@ public class PlayerSaveFile : MonoBehaviour
     /// <param name="privacystate"></param>
     public void SetPrivacyNotice(string privacystate)
     {
-        PlayerPrefs.SetString(PrefsKey.privacynotice.ToString(), privacystate);
+        PlayerPrefs.SetString(saveFile.privacyNotice, privacystate);
         PlayerPrefs.Save();
     }
 
@@ -39,7 +43,29 @@ public class PlayerSaveFile : MonoBehaviour
     /// <param name="score"></param>
     public void SetPlayerScore(int score)
     {
-        PlayerPrefs.SetInt(PrefsKey.playerscore.ToString(), score);
+        PlayerPrefs.SetInt(saveFile.playerScore, score);
         PlayerPrefs.Save();
+    }
+
+
+    /// <summary>
+    /// use method to activate/deactive audio
+    /// </summary>
+    public void ChangeAudioState(string state)
+    {
+        switch (state)
+        {
+            case "audio=true":
+                PlayerPrefs.SetString(saveFile.playerAudio, "audio=false");
+                audioState = PlayerPrefs.GetString(saveFile.playerAudio);
+                PlayerPrefs.Save();
+                break;
+
+            case "":
+                PlayerPrefs.SetString(saveFile.playerAudio, "audio=true");
+                audioState = PlayerPrefs.GetString(saveFile.playerAudio);
+                PlayerPrefs.Save();
+                break;
+        }
     }
 }
