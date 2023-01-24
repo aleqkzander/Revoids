@@ -9,12 +9,16 @@ public class RocketCollisionDetection : MonoBehaviour
     private GameObject player;
     private Vector2 startPosition;
     public GameObject mainScreen;
+    private GameObject adsManager;
 
 
     private void Start()
     {
         // get player 
         player = GameObject.FindGameObjectWithTag("Player");
+
+        // get ads manager
+        adsManager = GameObject.Find("AdsManager");
 
         // get start position from player
         startPosition = player.transform.position;
@@ -56,11 +60,20 @@ public class RocketCollisionDetection : MonoBehaviour
                 RemoveRocketShield(statistic);
             }
 
+            // prepare ads
+            if (statistic.rocketShields == 1)
+            {
+                // laod ads
+                adsManager.GetComponent<InterstitialAd>().LoadAd();
+            }
 
             if (statistic.rocketShields == 0)
             {
                 // call reset method
                 PlayerResetWithDelay();
+
+                // show ads
+                adsManager.GetComponent<InterstitialAd>().ShowAd();
             }
         }
     }
