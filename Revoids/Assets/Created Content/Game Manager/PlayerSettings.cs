@@ -16,11 +16,15 @@ public class PlayerSettings : MonoBehaviour
     public int playerScore = 0;
     public string playerSound;
 
-    [Header("Scene References")]
+    [Header("Privacy References")]
     public GameObject privacyManager;
-    public GameObject audioManager;
+
+    [Header("Audio References")]
+    public AudioLowPassFilter lowPass;
+    public AudioHighPassFilter highPass;
     public Image audioButton;
     public List<Sprite> audioButtonImages;
+
 
     private void Start()
     {
@@ -42,12 +46,14 @@ public class PlayerSettings : MonoBehaviour
         // play sound or not
         if (playerSound == "enabled")
         {
-            audioManager.SetActive(true);
+            lowPass.enabled = false;
+            highPass.enabled = false;
             audioButton.sprite = audioButtonImages[0];
         }
         else
         {
-            audioManager.SetActive(false);
+            lowPass.enabled = true;
+            highPass.enabled = true;
             audioButton.sprite = audioButtonImages[1];
         }
     }
@@ -115,18 +121,20 @@ public class PlayerSettings : MonoBehaviour
     /// </summary>
     public void SwitchAudio()
     {
-        if (audioManager.activeSelf)
+        if (lowPass.enabled)
         {
-            audioManager.SetActive(false);
-            playerSound = "";
-            audioButton.sprite = audioButtonImages[1];
+            lowPass.enabled = false;
+            highPass.enabled = false;
+            playerSound = "enabled";
+            audioButton.sprite = audioButtonImages[0];
             SaveSettings();
         }
         else
         {
-            audioManager.SetActive(true);
-            playerSound = "enabled";
-            audioButton.sprite = audioButtonImages[0];
+            lowPass.enabled = true;
+            highPass.enabled = true;
+            playerSound = "";
+            audioButton.sprite = audioButtonImages[1];
             SaveSettings();
         }
     }
