@@ -25,6 +25,10 @@ public class PlayerSettings : MonoBehaviour
     public Image audioButton;
     public List<Sprite> audioButtonImages;
 
+    private void Awake()
+    {
+        privacyManager.SetActive(true);
+    }
 
     private void Start()
     {

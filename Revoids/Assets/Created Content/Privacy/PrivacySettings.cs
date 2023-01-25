@@ -6,7 +6,6 @@ public class PrivacySettings : MonoBehaviour
 {
     public PlayerSettings settings;
 
-
     /// <summary>
     /// method to accept privacy notice
     /// </summary>
