@@ -14,6 +14,7 @@ TagManager:
   - ShieldDisplay
   - Music
   - AudioManager
+  - TutorialText
   layers:
   - Default
   - TransparentFX

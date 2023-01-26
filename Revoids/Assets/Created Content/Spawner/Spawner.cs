@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class Spawner : MonoBehaviour
     /// </summary>
     public void SpawnAttackTower()
     {
+        if (SceneManager.GetActiveScene().name == "How To Play Scene") return;
+
         for (int i = 0; i < towerAmount; i++)
         {
             Instantiate(attackTower, CreateRandomVector(colliderWidth), Quaternion.identity);
@@ -58,6 +61,8 @@ public class Spawner : MonoBehaviour
     /// </summary>
     public void SpawnCrewStation()
     {
+        if (SceneManager.GetActiveScene().name == "How To Play Scene") return;
+
         for (int i = 0; i < crewStationAmount; i++)
         {
             Instantiate(crewStation, CreateRandomVector(colliderWidth), Quaternion.identity);
@@ -70,6 +75,8 @@ public class Spawner : MonoBehaviour
     /// </summary>
     public void SpawnTree()
     {
+        if (SceneManager.GetActiveScene().name == "How To Play Scene") return;
+
         for (int i = 0; i < treeAmount; i++)
         {
             Instantiate(tree, CreateRandomVector(colliderWidth), Quaternion.identity);
