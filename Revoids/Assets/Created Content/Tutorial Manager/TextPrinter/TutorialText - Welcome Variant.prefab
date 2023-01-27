@@ -91,9 +91,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9033993033106871735, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
+      propertyPath: m_text
+      value: "Welcome to the world of Revoids!\n\nI'm gonna show you how to \nnavigate
+        through the world."
+      objectReference: {fileID: 0}
     - target: {fileID: 9033993033106871737, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_Name
-      value: TutorialText - Welcome
+      value: TutorialText - Welcome Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}

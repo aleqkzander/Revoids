@@ -165,8 +165,12 @@ public class RocketCollisionDetection : MonoBehaviour
         // get modelsprite
         GameObject model = player.transform.GetChild(0).gameObject;
 
-        // enable music filter
-        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioLowPassFilter>().enabled = true;
+        // check for musicmanager
+        if (GameObject.FindGameObjectWithTag("Music") != null)
+        {
+            // enable music filter
+            GameObject.FindGameObjectWithTag("Music").GetComponent<AudioLowPassFilter>().enabled = true;
+        }
 
         // activate gameover screen
         mainScreen.SetActive(true);

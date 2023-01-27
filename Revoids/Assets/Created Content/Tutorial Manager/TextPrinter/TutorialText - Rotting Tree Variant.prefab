@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 788292561630381606, guid: fca06292140ca8b4b8c7bce213723a31, type: 3}
       propertyPath: m_Name
-      value: TutorialText - Rotting Tree
+      value: TutorialText - Rotting Tree Variant
       objectReference: {fileID: 0}
     - target: {fileID: 788292561630381608, guid: fca06292140ca8b4b8c7bce213723a31, type: 3}
       propertyPath: m_text
-      value: "Destroy those rotting trees \nfor some extra points :)"
+      value: "Destroy those rotting trees \nfor some extra points!"
       objectReference: {fileID: 0}
     - target: {fileID: 788292561630381609, guid: fca06292140ca8b4b8c7bce213723a31, type: 3}
       propertyPath: m_Pivot.x

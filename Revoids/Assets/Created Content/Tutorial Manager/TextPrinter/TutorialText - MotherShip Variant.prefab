@@ -93,23 +93,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9033993033106871735, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_text
-      value: 'The mothership arrived obove you -
-
-        do you hear the sound?
+      value: 'The mothership arrived obove you!
 
 
-        Fly
-        towards the mothership and dock into it
+        Fly towards the mothership
+        and dock into it.
 
-        The unload process will
-        start automaticly
+        The unload process will start automaticly.
 
 
-        When finished you will me released!'
+        When
+        finished you will be released!'
       objectReference: {fileID: 0}
     - target: {fileID: 9033993033106871737, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_Name
-      value: TutorialText - MotherShip
+      value: TutorialText - MotherShip Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}

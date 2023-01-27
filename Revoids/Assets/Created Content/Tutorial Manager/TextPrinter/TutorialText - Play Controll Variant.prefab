@@ -93,23 +93,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9033993033106871735, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_text
-      value: 'This is your player
+      value: 'This is your player!
 
 
         Use the drive button to apply force
 
         and
-        controll the direction with the controller
+        controll the direction with the controller.
 
 
         Use the shoot button
         to shoot in the
 
-        direction you are looking'
+        direction you are looking.'
       objectReference: {fileID: 0}
     - target: {fileID: 9033993033106871737, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_Name
-      value: TutorialText - Play Controll
+      value: TutorialText - Play Controll Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}

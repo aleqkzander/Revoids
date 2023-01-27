@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerSettings : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class PlayerSettings : MonoBehaviour
     public string prefsAccepted = "playernotice";
     public string prefsScore = "playerscore";
     public string prefsSound = "playersound";
+    public string prefsTutorial = "tutorial";
 
     [Header("Current Settings")]
     public string playerAccepted;
     public int playerScore = 0;
     public string playerSound;
+    public string playerTutorial;
 
     [Header("Privacy References")]
     public GameObject privacyManager;
@@ -44,6 +47,13 @@ public class PlayerSettings : MonoBehaviour
         // load current settings
         LoadSettings();
 
+        // show tutorial when not watched
+        if (playerTutorial != "completed")
+        {
+            SceneManager.LoadScene("How To Play Scene", LoadSceneMode.Single);
+            return;
+        }
+
         // show privacy or not
         if (playerAccepted == "accepted") privacyManager.SetActive(false);
 
@@ -71,6 +81,7 @@ public class PlayerSettings : MonoBehaviour
         PlayerPrefs.SetString(prefsAccepted, playerAccepted);
         PlayerPrefs.SetInt(prefsScore, playerScore);
         PlayerPrefs.SetString(prefsSound, playerSound);
+        PlayerPrefs.SetString(prefsTutorial, playerTutorial);
         PlayerPrefs.Save();
     }
 
@@ -83,6 +94,8 @@ public class PlayerSettings : MonoBehaviour
         playerAccepted = PlayerPrefs.GetString(prefsAccepted);
         playerScore = PlayerPrefs.GetInt(prefsScore);
         playerSound = PlayerPrefs.GetString(prefsSound);
+        playerTutorial = PlayerPrefs.GetString(prefsTutorial);
+
     }
 
 

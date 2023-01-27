@@ -94,8 +94,8 @@ PrefabInstance:
     - target: {fileID: 9033993033106871735, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_text
       value: "Your crew members are being captured!\n\nSet them free by shooting
-        the prison cell \nWhen they are free land on the ground with the bottom of
-        your rocket too pick them up \n\nCollect 6 members and and tap to continue!"
+        a prison cell.\nLand on the ground with the bottom too pick them up. \n\nCollect
+        6 members and tap to continue!"
       objectReference: {fileID: 0}
     - target: {fileID: 9033993033106871737, guid: d64530b7fb5dc864c9f9a7fac8de99f8, type: 3}
       propertyPath: m_Name

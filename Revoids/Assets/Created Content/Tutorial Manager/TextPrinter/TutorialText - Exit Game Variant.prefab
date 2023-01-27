@@ -9,20 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1220171751646098370, guid: 7972e0525ffc49e4e81d1bdd055737c3, type: 3}
       propertyPath: m_Name
-      value: TutorialText - Exit Game
+      value: TutorialText - Exit Game Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1220171751646098380, guid: 7972e0525ffc49e4e81d1bdd055737c3, type: 3}
       propertyPath: m_text
-      value: 'When your unload all the crew members
+      value: 'When all crewmembers unloaded
 
-        The game will spawn
-        all objects again
+        the game will spawn all objects
+        again
 
-        with greater count and better stats
+        with greater count and better stats.
 
 
-        Have
-        fun playing!'
+        Have fun playing!'
       objectReference: {fileID: 0}
     - target: {fileID: 1220171751646098381, guid: 7972e0525ffc49e4e81d1bdd055737c3, type: 3}
       propertyPath: m_Pivot.x
