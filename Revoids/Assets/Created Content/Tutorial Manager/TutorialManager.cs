@@ -11,6 +11,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject playerObject;
 
     [Header("Prefabs")]
+    public GameObject motherShipPrefab;
     public GameObject rottingTreePrefab;
     public GameObject crewStationPrefab;
     public GameObject shootingTowerPrefab;
@@ -100,6 +101,7 @@ public class TutorialManager : MonoBehaviour
         {
             continueButton.text = "Tap to exit";
             currentCount++;
+            return;
         }
 
         // exit
@@ -167,10 +169,13 @@ public class TutorialManager : MonoBehaviour
         tutorial.StartTutorial();
 
         // spawn crew station
-        Instantiate(crewStationPrefab, new Vector2(playerObject.transform.position.x + 10, playerObject.transform.position.y), Quaternion.identity);
+        Instantiate(crewStationPrefab, new Vector2(playerObject.transform.position.x + 10, 5), Quaternion.identity);
 
         // spawn crew station
-        Instantiate(crewStationPrefab, new Vector2(playerObject.transform.position.x - 10, playerObject.transform.position.y), Quaternion.identity);
+        Instantiate(crewStationPrefab, new Vector2(playerObject.transform.position.x - 10, 5), Quaternion.identity);
+
+        // reset postition
+        playerObject.transform.position = new Vector2(0, 1);
     }
 
     public void ShowTutorial3()
@@ -189,6 +194,12 @@ public class TutorialManager : MonoBehaviour
 
         // print tutorial text
         tutorial.StartTutorial();
+
+        // reset postition
+        playerObject.transform.position = new Vector2(0, 1);
+
+        // spawn mother ship
+        Instantiate(motherShipPrefab, new Vector2(playerObject.transform.position.x, 27), Quaternion.identity);
     }
 
     public void ShowTutorial4()
@@ -208,8 +219,11 @@ public class TutorialManager : MonoBehaviour
         // print tutorial text
         tutorial.StartTutorial();
 
+        // reset postition
+        playerObject.transform.position = new Vector2(0, 1);
+
         // spawn attack tower
-        Instantiate(shootingTowerPrefab, new Vector2(playerObject.transform.position.x - 10, playerObject.transform.position.y), Quaternion.identity);
+        Instantiate(shootingTowerPrefab, new Vector2(playerObject.transform.position.x - 10, 5), Quaternion.identity);
     }
 
     public void ShowTutorial5()
@@ -229,8 +243,11 @@ public class TutorialManager : MonoBehaviour
         // print tutorial text
         tutorial.StartTutorial();
 
+        // reset postition
+        playerObject.transform.position = new Vector2(0, 1);
+
         // spawn rotting tree
-        Instantiate(rottingTreePrefab, new Vector2(playerObject.transform.position.x + 10, playerObject.transform.position.y), Quaternion.identity);
+        Instantiate(rottingTreePrefab, new Vector2(playerObject.transform.position.x + 10, 5), Quaternion.identity);
     }
 
     public void ShowTutorial6()

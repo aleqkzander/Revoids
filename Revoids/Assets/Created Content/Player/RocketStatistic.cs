@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -105,6 +106,7 @@ public class RocketStatistic : MonoBehaviour
         // spawn mothership when membercount is 6
         if (members == 6)
         {
+            if (SceneManager.GetActiveScene().name != "How To Play Scene")
             // spawn on players x
             Instantiate(motherShip, new Vector2(gameObject.transform.position.x, 27), Quaternion.identity);
         }
