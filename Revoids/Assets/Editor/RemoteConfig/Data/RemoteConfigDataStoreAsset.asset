@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"842d120f-673a-4c25-a2eb-fef9cb582e34\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"leaderboardEnabled\",\r\n      \"type\":
+    \"bool\",\r\n      \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"4fbb4e73-9190-4e93-9c37-d05a81704c70\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"leaderboardDelete\",\r\n      \"type\": \"bool\",\r\n     
+    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"2d030a74-ba8a-44e8-9f8a-0be7ee658e99\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"leaderboardLink\",\r\n      \"type\": \"string\",\r\n      \"value\":
+    \"https://www.dropbox.com/s/tyarx78xw46mw6j/leaderboardlist.txt?dl=1\"\r\n   
+    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"842d120f-673a-4c25-a2eb-fef9cb582e34\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"leaderboardEnabled\",\r\n      \"type\":
+    \"bool\",\r\n      \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
+    {\r\n      \"entityId\": \"4fbb4e73-9190-4e93-9c37-d05a81704c70\"\r\n    },\r\n   
+    \"rs\": {\r\n      \"key\": \"leaderboardDelete\",\r\n      \"type\": \"bool\",\r\n     
+    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"2d030a74-ba8a-44e8-9f8a-0be7ee658e99\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"leaderboardLink\",\r\n      \"type\": \"string\",\r\n      \"value\":
+    \"https://www.dropbox.com/s/tyarx78xw46mw6j/leaderboardlist.txt?dl=1\"\r\n   
+    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"fc0d8568-b3c2-4622-91ad-9b512cf41398\",\r\n   
+    \"name\": \"production\",\r\n    \"id\": \"fed35c71-0b49-45c3-afb3-e0f9e64bb575\",\r\n   
+    \"isDefault\": true,\r\n    \"createdAt\": \"2023-01-23T19:29:39Z\",\r\n    \"updatedAt\":
+    \"2023-01-23T19:29:39Z\"\r\n  }\r\n]"

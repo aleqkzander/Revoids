@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrewMember : MonoBehaviour
@@ -22,7 +20,7 @@ public class CrewMember : MonoBehaviour
         rocketController = GameObject.FindGameObjectWithTag("Player").GetComponent<RocketController>();
 
         // create a random move value
-        moveValue = Random.Range(1,3);
+        moveValue = Random.Range(1, 3);
 
         // invoke movearound every 2 seconds
         InvokeRepeating("ChangeDirection", 0.25f, 2);
@@ -36,7 +34,7 @@ public class CrewMember : MonoBehaviour
 
         // return when not on ground
         if (!isGrounded) return;
-       
+
         // move around randomly
         if (!rocketController.isGrounded) MoveAround();
 
@@ -69,7 +67,7 @@ public class CrewMember : MonoBehaviour
     public void MoveAround()
     {
         // walk left or right
-        if (walkRight == true) rigidbody.velocity = Vector2.right * moveValue; 
+        if (walkRight == true) rigidbody.velocity = Vector2.right * moveValue;
         if (walkRight == false) rigidbody.velocity = Vector2.left * moveValue;
     }
 

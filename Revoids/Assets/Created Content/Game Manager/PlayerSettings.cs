@@ -1,32 +1,54 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerSettings : MonoBehaviour
 {
+    #region PREFERENCE KEYS
     [Header("Player Preference Keys")]
     public string prefsAccepted = "playernotice";
     public string prefsScore = "playerscore";
     public string prefsSound = "playersound";
     public string prefsTutorial = "tutorial";
+    public string prefsUsername = "playerusername";
+    #endregion PREFERENCE KEYS
 
+    #region CURRENT SETTINGS
     [Header("Current Settings")]
     public string playerAccepted;
     public int playerScore = 0;
     public string playerSound;
     public string playerTutorial;
+    public string playerUsername;
+    #endregion CURRENT SETTINGS
 
+    #region USERNAME UI
+
+    [Header("USERNAME REFERENCES")]
+    public GameObject usernameUI;
+    public TMP_InputField usernameInput;
+    #endregion USERNAME UI
+
+    #region PRIVACY REFERENCE
     [Header("Privacy References")]
     public GameObject privacyManager;
+    #endregion PRIVACY REFERENCE
 
+    #region AUDIO REFERENCES
     [Header("Audio References")]
-    public AudioLowPassFilter lowPass;
-    public AudioHighPassFilter highPass;
+    public AudioSource audioSource;
     public Image audioButton;
     public List<Sprite> audioButtonImages;
+    #endregion
+
+    #region LEADERBOARD REFERENCE
+    [Header("Leaderboard References")]
+    public LeaderboardManager leaderboardManager;
+    public GameObject userAlreadyPresenetNotification;
+    #endregion LEADERBOARD REFERENCE
 
     private void Awake()
     {
@@ -57,17 +79,22 @@ public class PlayerSettings : MonoBehaviour
         // show privacy or not
         if (playerAccepted == "accepted") privacyManager.SetActive(false);
 
+
+        if (PlayerPrefs.GetString(prefsSound) == "") playerSound = "enabled";
+
+
+        if (PlayerPrefs.GetString(prefsUsername) == "") usernameUI.SetActive(true);
+
+
         // play sound or not
         if (playerSound == "enabled")
         {
-            lowPass.enabled = false;
-            highPass.enabled = false;
+            audioSource.enabled = true;
             audioButton.sprite = audioButtonImages[0];
         }
         else
         {
-            lowPass.enabled = true;
-            highPass.enabled = true;
+            audioSource.enabled = false;
             audioButton.sprite = audioButtonImages[1];
         }
     }
@@ -82,6 +109,7 @@ public class PlayerSettings : MonoBehaviour
         PlayerPrefs.SetInt(prefsScore, playerScore);
         PlayerPrefs.SetString(prefsSound, playerSound);
         PlayerPrefs.SetString(prefsTutorial, playerTutorial);
+        PlayerPrefs.SetString(prefsUsername, playerUsername);
         PlayerPrefs.Save();
     }
 
@@ -95,7 +123,7 @@ public class PlayerSettings : MonoBehaviour
         playerScore = PlayerPrefs.GetInt(prefsScore);
         playerSound = PlayerPrefs.GetString(prefsSound);
         playerTutorial = PlayerPrefs.GetString(prefsTutorial);
-
+        playerUsername = PlayerPrefs.GetString(prefsUsername);
     }
 
 
@@ -138,21 +166,53 @@ public class PlayerSettings : MonoBehaviour
     /// </summary>
     public void SwitchAudio()
     {
-        if (lowPass.enabled)
+        if (!audioSource.enabled)
         {
-            lowPass.enabled = false;
-            highPass.enabled = false;
+            audioSource.enabled = true;
             playerSound = "enabled";
             audioButton.sprite = audioButtonImages[0];
             SaveSettings();
         }
         else
         {
-            lowPass.enabled = true;
-            highPass.enabled = true;
-            playerSound = "";
+            audioSource.enabled = false;
+            playerSound = "disabled";
             audioButton.sprite = audioButtonImages[1];
             SaveSettings();
         }
+    }
+
+
+    /// <summary>
+    /// set a username
+    /// </summary>
+    public void SetUsername()
+    {
+        foreach (string entry in leaderboardManager.leaderboardUsers)
+        {
+            if (usernameInput.text == entry)
+            {
+                userAlreadyPresenetNotification.SetActive(true);
+                Invoke("DisableNotification", 5);
+                Debug.Log("Username already used");
+                return;
+            }
+        }
+
+
+        Debug.Log("Username was set and saved");
+        playerUsername = usernameInput.text;
+        PlayerPrefs.SetString(prefsUsername, playerUsername);
+        SaveSettings();
+        usernameUI.SetActive(false);
+    }
+
+
+    /// <summary>
+    /// invoke method to disable notification
+    /// </summary>
+    public void DisableNotification()
+    {
+        userAlreadyPresenetNotification.SetActive(false);
     }
 }

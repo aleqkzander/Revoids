@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RocketStatistic : MonoBehaviour
 {
@@ -107,8 +106,8 @@ public class RocketStatistic : MonoBehaviour
         if (members == 6)
         {
             if (SceneManager.GetActiveScene().name != "How To Play Scene")
-            // spawn on players x
-            Instantiate(motherShip, new Vector2(gameObject.transform.position.x, 27), Quaternion.identity);
+                // spawn on players x
+                Instantiate(motherShip, new Vector2(gameObject.transform.position.x, 27), Quaternion.identity);
         }
 
         // destroy the crew member

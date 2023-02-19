@@ -15,6 +15,7 @@ TagManager:
   - Music
   - AudioManager
   - TutorialText
+  - LeaderboardEntry
   layers:
   - Default
   - TransparentFX

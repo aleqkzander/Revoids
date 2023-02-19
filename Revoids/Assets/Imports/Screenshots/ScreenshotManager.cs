@@ -1,6 +1,4 @@
-using UnityEditor;
 using UnityEngine;
-using System.IO;
 
 public class ScreenshotManager : MonoBehaviour
 {

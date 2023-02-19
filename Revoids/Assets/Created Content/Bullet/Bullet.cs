@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -169,7 +167,7 @@ public class Bullet : MonoBehaviour
             CrewStationHit(collision);
         }
 
-        
+
         // if attack tower gets hit by player
         if (collision.gameObject.CompareTag("AttackTower") && shootFlag == "player")
         {

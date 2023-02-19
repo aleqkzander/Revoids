@@ -8,6 +8,7 @@ public class RocketCollisionDetection : MonoBehaviour
     public GameObject explosionSound;
     private GameObject player;
     private Vector2 startPosition;
+    private GameObject audioManager;
     public GameObject mainScreen;
     private GameObject adsManager;
 
@@ -19,6 +20,9 @@ public class RocketCollisionDetection : MonoBehaviour
 
         // get ads manager
         adsManager = GameObject.Find("AdsManager");
+
+        // get audio manager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager");
 
         // get start position from player
         startPosition = player.transform.position;
@@ -42,6 +46,7 @@ public class RocketCollisionDetection : MonoBehaviour
     }
 
 
+    [System.Obsolete] // lootlocker seems to be outdated
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collisionCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))
@@ -69,6 +74,25 @@ public class RocketCollisionDetection : MonoBehaviour
 
             if (statistic.rocketShields == 0)
             {
+                // get playersettings
+                PlayerSettings playerSettings = GameObject.Find("GameManager").GetComponent<PlayerSettings>();
+
+                // get leaderboardmanager
+                LeaderboardManager leaderboardManager = GameObject.Find("LeaderboardManager").GetComponent<LeaderboardManager>();
+
+                // save score to leaderboard when currentscore is bigger then player highscore
+                if (statistic.score > playerSettings.playerScore)
+                {
+                    // set new hight score
+                    playerSettings.playerScore = statistic.score;
+
+                    // save
+                    playerSettings.SaveSettings();
+
+                    // submit to database
+                    StartCoroutine(leaderboardManager.SumbitScore(playerSettings.playerScore));
+                }
+
                 // call reset method
                 PlayerResetWithDelay();
 
@@ -165,13 +189,6 @@ public class RocketCollisionDetection : MonoBehaviour
         // get modelsprite
         GameObject model = player.transform.GetChild(0).gameObject;
 
-        // check for musicmanager
-        if (GameObject.FindGameObjectWithTag("Music") != null)
-        {
-            // enable music filter
-            GameObject.FindGameObjectWithTag("Music").GetComponent<AudioLowPassFilter>().enabled = true;
-        }
-
         // activate gameover screen
         mainScreen.SetActive(true);
 
@@ -183,6 +200,9 @@ public class RocketCollisionDetection : MonoBehaviour
 
         // remove simulation
         rigidbody.simulated = false;
+
+        // enable lowpass filter
+        audioManager.GetComponent<AudioLowPassFilter>().enabled = true;
     }
 
 
@@ -194,21 +214,19 @@ public class RocketCollisionDetection : MonoBehaviour
         // get rigidbody
         Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
 
-
         // get modelsprite
         GameObject model = player.transform.GetChild(0).gameObject;
 
-        // enable music filter
-        GameObject.FindGameObjectWithTag("Music").GetComponent<AudioLowPassFilter>().enabled = false;
-
         // wake up
         rigidbody.WakeUp();
-
 
         // eable model
         model.SetActive(true);
 
         // remove simulation
         rigidbody.simulated = true;
+
+        // disable lowpass filter
+        audioManager.GetComponent<AudioLowPassFilter>().enabled = false;
     }
 }

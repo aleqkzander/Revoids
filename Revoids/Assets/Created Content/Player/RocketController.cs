@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketController : MonoBehaviour
@@ -92,14 +90,9 @@ public class RocketController : MonoBehaviour
         // reset velocity
         if (isGrounded)
         {
-            #region dont reset anymore
-            // get collision detector
-            //RocketCollisionDetection collisionDetection = gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>();
-
-
-            // reset speed and rotation
-            //collisionDetection.ResetSpeedAndRotation();
-            #endregion
+            // reset gloabl velocity
+            rigidbody.velocity = Vector2.zero;
+            rigidbody.angularVelocity = 0;
         }
     }
 
