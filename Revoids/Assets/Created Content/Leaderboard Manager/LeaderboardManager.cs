@@ -16,7 +16,6 @@ public class LeaderboardManager : MonoBehaviour
     int leaderboardID = 11904;
     string leaderboardKey = "revoid_leaderboard_key";
 
-
     [Obsolete]
     private void Start()
     {
@@ -44,9 +43,11 @@ public class LeaderboardManager : MonoBehaviour
             }
 
             // activate leaderboard button
-            leaderboardButton.SetActive(true);
+            if (leaderboardButton.gameObject != null) leaderboardButton.SetActive(true);
 
             Debug.Log("Successfully started LootLocker session");
+
+            if (this == null) return;
 
             StartCoroutine(FetchHighScores());
         });
@@ -140,6 +141,11 @@ public class LeaderboardManager : MonoBehaviour
         });
 
         yield return new WaitWhile(() => fetchresponse.success == false);
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }
 

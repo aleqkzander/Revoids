@@ -53,6 +53,7 @@ public class PlayerSettings : MonoBehaviour
     private void Awake()
     {
         privacyManager.SetActive(true);
+        usernameUI.SetActive(true);
     }
 
     private void Start()
@@ -83,7 +84,7 @@ public class PlayerSettings : MonoBehaviour
         if (PlayerPrefs.GetString(prefsSound) == "") playerSound = "enabled";
 
 
-        if (PlayerPrefs.GetString(prefsUsername) == "") usernameUI.SetActive(true);
+        if (PlayerPrefs.GetString(prefsUsername) != "") usernameUI.SetActive(false);
 
 
         // play sound or not
@@ -188,6 +189,8 @@ public class PlayerSettings : MonoBehaviour
     /// </summary>
     public void SetUsername()
     {
+        if (usernameInput.text == string.Empty) return;
+
         foreach (string entry in leaderboardManager.leaderboardUsers)
         {
             if (usernameInput.text == entry)

@@ -189,6 +189,7 @@ public class RocketCollisionDetection : MonoBehaviour
         // get modelsprite
         GameObject model = player.transform.GetChild(0).gameObject;
 
+
         // activate gameover screen
         mainScreen.SetActive(true);
 
