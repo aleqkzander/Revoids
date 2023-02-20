@@ -49,6 +49,7 @@ public class LeaderboardManager : MonoBehaviour
 
             if (this == null) return;
 
+            // Fetch highscores
             StartCoroutine(FetchHighScores());
         });
 

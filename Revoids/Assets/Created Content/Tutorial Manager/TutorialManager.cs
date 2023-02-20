@@ -325,4 +325,12 @@ public class TutorialManager : MonoBehaviour
 
         player.transform.position = new Vector2(0, -2);
     }
+
+
+    public void SkipTutorial()
+    {
+        PlayerPrefs.SetString("tutorial", "completed");
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
+    }
 }

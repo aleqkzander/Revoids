@@ -81,10 +81,10 @@ public class PlayerSettings : MonoBehaviour
         if (playerAccepted == "accepted") privacyManager.SetActive(false);
 
 
-        if (PlayerPrefs.GetString(prefsSound) == "") playerSound = "enabled";
+        if (playerSound == string.Empty) playerSound = "enabled";
 
 
-        if (PlayerPrefs.GetString(prefsUsername) != "") usernameUI.SetActive(false);
+        if (playerUsername != string.Empty) usernameUI.SetActive(false);
 
 
         // play sound or not
