@@ -13,6 +13,7 @@ public class RocketCollisionDetection : MonoBehaviour
     private GameObject adsManager;
 
 
+
     private void Start()
     {
         // get player 
@@ -89,8 +90,12 @@ public class RocketCollisionDetection : MonoBehaviour
                     // save
                     playerSettings.SaveSettings();
 
-                    // submit to database
-                    StartCoroutine(leaderboardManager.SumbitScore(playerSettings.playerScore));
+                    // submit score only when not devcode
+                    if (!playerSettings.playerUsername.Contains("#devmode"))
+                    {
+                        // submit to database
+                        StartCoroutine(leaderboardManager.SumbitScore(playerSettings.playerScore));
+                    }
                 }
 
                 // call reset method
