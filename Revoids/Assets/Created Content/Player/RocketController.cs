@@ -91,8 +91,8 @@ public class RocketController : MonoBehaviour
         if (isGrounded)
         {
             // reset gloabl velocity
-            rigidbody.velocity = Vector2.zero;
-            rigidbody.angularVelocity = 0;
+            //rigidbody.velocity = Vector2.zero;
+            //rigidbody.angularVelocity = 0;
         }
     }
 

@@ -32,7 +32,7 @@ public class RocketCollisionDetection : MonoBehaviour
         FreezePlayer();
     }
 
-
+    [System.Obsolete]
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -40,7 +40,7 @@ public class RocketCollisionDetection : MonoBehaviour
             PlayerResetWithDelay();
         }
 
-        if (Input.touchCount == 3)
+        if (Input.touchCount == 4)
         {
             FreezePlayer();
         }
@@ -52,58 +52,75 @@ public class RocketCollisionDetection : MonoBehaviour
     {
         if (collisionCheck.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-            // get statistic
-            RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
+            // When player is hitting the ground falsely
+            PlayerHit();
+        }
+    }
 
 
-            // play explosion sound
-            Instantiate(explosionSound, gameObject.transform.position, Quaternion.identity);
+    /// <summary>
+    /// Call method on player damage
+    /// </summary>
+    [System.Obsolete]
+    public void PlayerHit()
+    {
+        // get statistic
+        RocketStatistic statistic = player.transform.GetChild(1).GetComponent<RocketStatistic>();
 
 
-            // remove a rocketshield
-            if (statistic.rocketShields > 0)
+        // play explosion sound
+        Instantiate(explosionSound, gameObject.transform.position, Quaternion.identity);
+
+
+        // remove a rocketshield
+        if (statistic.rocketShields > 0)
+        {
+            RemoveRocketShield(statistic);
+        }
+
+        // prepare ads
+        if (statistic.rocketShields == 1)
+        {
+            // laod ads
+            adsManager.GetComponent<InterstitialAd>().LoadAd();
+        }
+
+        if (statistic.rocketShields == 0)
+        {
+            // get playersettings
+            PlayerSettings playerSettings = GameObject.Find("GameManager").GetComponent<PlayerSettings>();
+
+            // get leaderboardmanager
+            LeaderboardManager leaderboardManager = GameObject.Find("LeaderboardManager").GetComponent<LeaderboardManager>();
+
+
+            #region obsoblet (moved to playerrestwithdelay)
+
+            // save score to leaderboard when currentscore is bigger then player highscore
+            if (statistic.score > playerSettings.playerScore)
             {
-                RemoveRocketShield(statistic);
-            }
+                // set new hight score
+                playerSettings.playerScore = statistic.score;
 
-            // prepare ads
-            if (statistic.rocketShields == 1)
-            {
-                // laod ads
-                adsManager.GetComponent<InterstitialAd>().LoadAd();
-            }
+                // save
+                playerSettings.SaveSettings();
 
-            if (statistic.rocketShields == 0)
-            {
-                // get playersettings
-                PlayerSettings playerSettings = GameObject.Find("GameManager").GetComponent<PlayerSettings>();
-
-                // get leaderboardmanager
-                LeaderboardManager leaderboardManager = GameObject.Find("LeaderboardManager").GetComponent<LeaderboardManager>();
-
-                // save score to leaderboard when currentscore is bigger then player highscore
-                if (statistic.score > playerSettings.playerScore)
+                // submit score only when not devcode
+                if (!playerSettings.playerUsername.Contains("#devmode"))
                 {
-                    // set new hight score
-                    playerSettings.playerScore = statistic.score;
-
-                    // save
-                    playerSettings.SaveSettings();
-
-                    // submit score only when not devcode
-                    if (!playerSettings.playerUsername.Contains("#devmode"))
-                    {
-                        // submit to database
-                        StartCoroutine(leaderboardManager.SumbitScore(playerSettings.playerScore));
-                    }
+                    // submit to database
+                    StartCoroutine(leaderboardManager.SumbitScore(playerSettings.playerScore));
                 }
-
-                // call reset method
-                PlayerResetWithDelay();
-
-                // show ads
-                adsManager.GetComponent<InterstitialAd>().ShowAd();
             }
+
+            #endregion obsolet (moved to playerrestwithdelay)
+
+
+            // call reset method
+            PlayerResetWithDelay();
+
+            // show ads
+            adsManager.GetComponent<InterstitialAd>().ShowAd();
         }
     }
 
@@ -113,6 +130,7 @@ public class RocketCollisionDetection : MonoBehaviour
     /// </summary>
     /// <param name="delay"></param>
     /// <returns></returns>
+    [System.Obsolete] // lootlocker not up to data
     public void PlayerResetWithDelay()
     {
         // get statistic
@@ -141,8 +159,10 @@ public class RocketCollisionDetection : MonoBehaviour
     /// <summary>
     /// Use method to reset speed and rotation
     /// </summary>
+    [System.Obsolete]
     public void ResetSpeedAndRotation()
     {
+
         // get rigidbody
         Rigidbody2D rigidbody = player.GetComponent<Rigidbody2D>();
 

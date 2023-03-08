@@ -30,6 +30,7 @@ public class PlayerSettings : MonoBehaviour
     [Header("USERNAME REFERENCES")]
     public GameObject usernameUI;
     public TMP_InputField usernameInput;
+    public TMP_Text usernameText;
     #endregion USERNAME UI
 
     #region PRIVACY REFERENCE
@@ -59,6 +60,7 @@ public class PlayerSettings : MonoBehaviour
     private void Start()
     {
         LoadGameState();
+        usernameText.text = playerUsername;
     }
 
 

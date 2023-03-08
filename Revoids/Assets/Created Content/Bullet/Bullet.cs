@@ -55,25 +55,10 @@ public class Bullet : MonoBehaviour
     /// Call method on player hit
     /// </summary>
     /// <param name="collision"></param>
+    [System.Obsolete]
     public void PlayerHit(Collision2D collision)
     {
-        // get rocket statistic from collision
-        RocketStatistic statistic = collision.gameObject.transform.GetChild(1).GetComponent<RocketStatistic>();
-
-        // check rocket shields
-        if (statistic.rocketShields > 0)
-        {
-            // subliment shield
-            statistic.rocketShields--;
-
-            // manageui
-            statistic.UpdateUI();
-        }
-        else if (statistic.rocketShields == 0)
-        {
-            // if shield==0 then reset player
-            collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerResetWithDelay();
-        }
+        collision.gameObject.transform.GetChild(3).GetComponent<RocketCollisionDetection>().PlayerHit();
     }
 
 
@@ -151,7 +136,7 @@ public class Bullet : MonoBehaviour
         Destroy(collision.gameObject);
     }
 
-
+    [System.Obsolete]
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // when player gets hit by tower
